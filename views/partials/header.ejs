@@ -8,12 +8,12 @@
         <!-- Center: Nav -->
         <nav class="main-nav">
             <ul>
-                <li><a href="/" class="nav-link">Home</a></li>
-                <li><a href="/kursus-online" class="nav-link">Kursus Online</a></li>
-                <li><a href="/jalur-karir" class="nav-link">Jalur Karir</a></li>
-                <li><a href="/about" class="nav-link">Tentang Kami</a></li>
-                <li><a href="/blog" class="nav-link">Blog</a></li>
-                <li><a href="/contact" class="nav-link">Kontak</a></li>
+                <li><a href="/" class="nav-link<%= currentPath === '/' ? ' active' : '' %>">Home</a></li>
+                <li><a href="/kursus-online" class="nav-link<%= currentPath === '/kursus-online' ? ' active' : '' %>">Kursus Online</a></li>
+                <li><a href="/jalur-karir" class="nav-link<%= currentPath === '/jalur-karir' ? ' active' : '' %>">Jalur Karir</a></li>
+                <li><a href="/about" class="nav-link<%= currentPath === '/about' ? ' active' : '' %>">Tentang Kami</a></li>
+                <li><a href="/blog" class="nav-link<%= currentPath === '/blog' ? ' active' : '' %>">Blog</a></li>
+                <li><a href="/contact" class="nav-link<%= currentPath === '/contact' ? ' active' : '' %>">Kontak</a></li>
             </ul>
         </nav>
 

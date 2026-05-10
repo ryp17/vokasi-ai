@@ -195,6 +195,19 @@ img {
 }
 
 .nav-link:hover { color: var(--clr-secondary); }
+.nav-link.active {
+    color: var(--clr-secondary);
+}
+.nav-link.active::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--clr-secondary);
+    border-radius: 1px;
+}
 
 .mobile-toggle {
     display: none;
@@ -528,7 +541,34 @@ select.form-control {
 
 /* Mobile Responsiveness */
 @media (max-width: 900px) {
-    .section { padding: var(--spacing-lg) 0; }
+    .section { padding: var(--spacing-md) 0; }
+
+    /* WhatsApp button smaller on mobile */
+    #wa-cta {
+        width: 48px !important;
+        height: 48px !important;
+        bottom: 1rem !important;
+        right: 1rem !important;
+    }
+    #wa-cta svg {
+        width: 24px !important;
+        height: 24px !important;
+    }
+
+    /* Contact heading mobile */
+    .contact-hero h1 {
+        font-size: clamp(1.5rem, 5vw, 2.5rem) !important;
+    }
+
+    /* Kursus cards mobile padding */
+    .kursus-card {
+        padding: 1.5rem 1.25rem !important;
+    }
+
+    /* Visi/Misi cards mobile padding */
+    .visi-misi-card {
+        padding: 2rem 1.5rem !important;
+    }
     
     .grid-stack-md {
         grid-template-columns: 1fr !important;

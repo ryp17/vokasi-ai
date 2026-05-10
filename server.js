@@ -11,6 +11,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+// Make current path available to all views
+app.use((req, res, next) => {
+    res.locals.currentPath = req.path;
+    next();
+});
+
 // Routes
 app.get('/', (req, res) => {
     res.render('pages/index', { pageTitle: 'Home | Vokasi.ai' });
