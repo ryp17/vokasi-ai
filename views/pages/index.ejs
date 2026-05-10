@@ -1,0 +1,354 @@
+<%- include('../partials/head', { pageTitle: 'Vokasi | Melengkapi Pendidikan, Mengakselerasi Karier' }) %>
+
+    <!-- Hero Section -->
+    <section class="section" style="padding-top: calc(var(--spacing-xl) + var(--header-height)); padding-bottom: var(--spacing-lg);">
+        <div class="container">
+            <div class="grid grid-2" style="align-items: center; gap: 4rem;">
+                
+                <!-- Left: Text Content -->
+                <div class="hero-text-container">
+                    <div style="display: inline-flex; align-items: center; gap: 0.5rem; background: #F1F5F9; color: var(--clr-text-muted); padding: 8px 16px; border-radius: 50px; font-size: 0.85rem; font-weight: 600; margin-bottom: 1.5rem;">
+                        <span style="color: var(--clr-secondary);">🔒</span> Platform Edukasi Terpercaya
+                    </div>
+                    <h1 style="margin-bottom: 1.5rem; line-height: 1.1; color: var(--clr-text-main);">
+                        Melengkapi Pendidikan, Mengakselerasi <span style="color: var(--clr-secondary);">Karier</span>
+                    </h1>
+                    <p style="font-size: 1.15rem; color: var(--clr-text-muted); margin-bottom: 2.5rem; line-height: 1.6;">
+                        Vokasi menyediakan platform kursus online dengan kurikulum berbasis dunia kerja nyata, mentor ahli, dan pengalaman belajar interaktif yang dirancang untuk kesuksesan karier Anda di industri terkini.
+                    </p>
+                    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem;">
+                        <a href="#kategori" class="btn btn-primary" style="padding: 16px 32px; border-radius: var(--radius-sm); font-size: 1.05rem; background-color: var(--clr-secondary); border: none;">Mulai Belajar</a>
+                        <a href="#cara-kerja" class="btn btn-outline" style="padding: 16px 32px; border-radius: var(--radius-sm); font-size: 1.05rem; border-color: var(--clr-border); color: var(--clr-text-main);">
+                            <span style="margin-right: 0.5rem;">⏱</span> Lihat Cara Kerja
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Right: AI Labs Card -->
+                <div>
+                    <div class="white-card" style="padding: 3rem; border-radius: var(--radius-lg); position: relative; box-shadow: 0 20px 40px -10px rgba(0,0,0,0.08);">
+                        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
+                            <div style="width: 48px; height: 48px; border-radius: 12px; background: var(--clr-secondary); color: white; display: flex; align-items: center; justify-content: center;">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6"/><path d="M10 9l-5 8.4A2 2 0 0 0 6.7 21h10.6a2 2 0 0 0 1.7-3.6L14 9V3h-4v6z"/><path d="M6.5 15h11"/></svg>
+                            </div>
+                            <div>
+                                <div style="font-size: 0.75rem; font-weight: 800; color: var(--clr-text-muted); letter-spacing: 1px;">INOVASI TERBARU</div>
+                                <h3 style="font-size: 1.5rem; margin: 0; color: var(--clr-text-main);">Vokasi AI Labs</h3>
+                            </div>
+                        </div>
+                        
+                        <p style="color: var(--clr-text-muted); font-size: 1.05rem; line-height: 1.6; margin-bottom: 2rem;">
+                            Eksplorasi modul pembelajaran berbasis Kecerdasan Buatan yang dirancang untuk mempercepat pemahaman materi kompleks secara personal.
+                        </p>
+                        
+                        <div style="display: flex; flex-direction: column; gap: 1rem; margin-bottom: 2rem;">
+                            <!-- Progress row 1 -->
+                            <div style="display: flex; align-items: center; gap: 1rem;">
+                                <div style="width: 40px; height: 40px; border-radius: 50%; background: #EFF6FF; color: var(--clr-secondary); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                                </div>
+                                <div style="flex-grow: 1;">
+                                    <div style="display: flex; justify-content: space-between; font-size: 0.8rem; font-weight: 700; color: var(--clr-text-main); margin-bottom: 0.3rem;">
+                                        <span>Modul 1: Pengenalan AI</span>
+                                        <span style="color: var(--clr-secondary);">100%</span>
+                                    </div>
+                                    <div style="height: 8px; background: #E2E8F0; border-radius: 4px; overflow: hidden;">
+                                        <div style="width: 100%; height: 100%; background: var(--clr-secondary);"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Progress row 2 -->
+                            <div style="display: flex; align-items: center; gap: 1rem;">
+                                <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--clr-bg-neu); color: var(--clr-text-muted); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                                    <span style="font-weight: 800; font-size: 0.9rem;">2</span>
+                                </div>
+                                <div style="flex-grow: 1;">
+                                    <div style="display: flex; justify-content: space-between; font-size: 0.8rem; font-weight: 700; color: var(--clr-text-main); margin-bottom: 0.3rem;">
+                                        <span>Modul 2: Praktik Machine Learning</span>
+                                        <span style="color: var(--clr-secondary);">45%</span>
+                                    </div>
+                                    <div style="height: 8px; background: #E2E8F0; border-radius: 4px; overflow: hidden;">
+                                        <div style="width: 45%; height: 100%; background: var(--clr-secondary);"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <a href="#" style="display: block; text-align: center; color: var(--clr-secondary); font-weight: 700; font-size: 0.95rem; text-decoration: none; border-top: 1px solid var(--clr-border); padding-top: 1.5rem;">
+                            Coba Demo Gratis ➔
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Kursus Populer Section -->
+    <section id="kursus" class="section" style="padding-top: var(--spacing-lg); padding-bottom: var(--spacing-lg); background-color: var(--clr-bg-alt);">
+        <div class="container text-center">
+            <h2 style="margin-bottom: 1rem; color: var(--clr-text-main);">Jelajahi Kursus Populer</h2>
+            <p style="font-size: 1.1rem; color: var(--clr-text-muted); margin-bottom: 3rem; max-width: 600px; margin-left: auto; margin-right: auto;">
+                Pilih dari berbagai disiplin ilmu yang dirancang khusus untuk memenuhi permintaan industri masa kini dan masa depan.
+            </p>
+            
+            <div style="position: relative;">
+                <div id="course-carousel" class="mobile-carousel" style="display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 1.5rem; padding-top: 1.5rem; padding-bottom: 1.5rem; scrollbar-width: none; -ms-overflow-style: none; scroll-behavior: smooth; width: 100%;">
+                    <!-- Hide scrollbar in Webkit via a quick inline style block -->
+                    <style>
+                        #course-carousel::-webkit-scrollbar { display: none; }
+                    </style>
+                    
+                    <!-- Course 1 -->
+                    <div class="white-card" style="flex: 0 0 280px; scroll-snap-align: start; padding: 2.5rem 1.5rem; border-radius: var(--radius-lg); text-align: center; display: flex; flex-direction: column; align-items: center;">
+                        <div style="width: 64px; height: 64px; border-radius: 50%; background: #EFF6FF; color: var(--clr-secondary); display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem;">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
+                        </div>
+                        <h3 style="font-size: 1.15rem; color: var(--clr-text-main); margin-bottom: 0.5rem; line-height: 1.4;">Online Marketing Fundamental</h3>
+                        <p style="color: var(--clr-text-muted); font-size: 0.9rem; line-height: 1.5;">Kuasai dasar-dasar pemasaran di era digital.</p>
+                    </div>
+                    
+                    <!-- Course 2 -->
+                    <div class="white-card" style="flex: 0 0 280px; scroll-snap-align: start; padding: 2.5rem 1.5rem; border-radius: var(--radius-lg); text-align: center; display: flex; flex-direction: column; align-items: center;">
+                        <div style="width: 64px; height: 64px; border-radius: 50%; background: #EFF6FF; color: var(--clr-secondary); display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem;">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 2h-3a5 5 0 0 0-5 5v3H6v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                        </div>
+                        <h3 style="font-size: 1.15rem; color: var(--clr-text-main); margin-bottom: 0.5rem; line-height: 1.4;">Social Media Fundamental</h3>
+                        <p style="color: var(--clr-text-muted); font-size: 0.9rem; line-height: 1.5;">Bangun audiens setia lewat konten sosial yang tepat.</p>
+                    </div>
+                    
+                    <!-- Course 3 -->
+                    <div class="white-card" style="flex: 0 0 280px; scroll-snap-align: start; padding: 2.5rem 1.5rem; border-radius: var(--radius-lg); text-align: center; display: flex; flex-direction: column; align-items: center; position: relative;">
+                        <span style="position: absolute; top: -10px; right: 20px; background: #DBEAFE; color: var(--clr-secondary); font-size: 0.65rem; font-weight: 800; padding: 4px 8px; border-radius: 12px; z-index: 2;">COMING SOON</span>
+                        <div style="width: 64px; height: 64px; border-radius: 50%; background: #F1F5F9; color: var(--clr-text-muted); display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem;">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                        </div>
+                        <h3 style="font-size: 1.15rem; color: var(--clr-text-muted); margin-bottom: 0.5rem; line-height: 1.4;">Cyber Security</h3>
+                        <p style="color: var(--clr-text-muted); font-size: 0.9rem; line-height: 1.5;">Amankan data dan sistem digital dari ancaman siber.</p>
+                    </div>
+                    
+                    <!-- Course 4 -->
+                    <div class="white-card" style="flex: 0 0 280px; scroll-snap-align: start; padding: 2.5rem 1.5rem; border-radius: var(--radius-lg); text-align: center; display: flex; flex-direction: column; align-items: center; position: relative;">
+                        <span style="position: absolute; top: -10px; right: 20px; background: #DBEAFE; color: var(--clr-secondary); font-size: 0.65rem; font-weight: 800; padding: 4px 8px; border-radius: 12px; z-index: 2;">COMING SOON</span>
+                        <div style="width: 64px; height: 64px; border-radius: 50%; background: #F1F5F9; color: var(--clr-text-muted); display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem;">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
+                        </div>
+                        <h3 style="font-size: 1.15rem; color: var(--clr-text-muted); margin-bottom: 0.5rem; line-height: 1.4;">Performance Marketing</h3>
+                        <p style="color: var(--clr-text-muted); font-size: 0.9rem; line-height: 1.5;">Optimasi kampanye iklan untuk ROI yang maksimal.</p>
+                    </div>
+
+                    <!-- Course 5 -->
+                    <div class="white-card" style="flex: 0 0 280px; scroll-snap-align: start; padding: 2.5rem 1.5rem; border-radius: var(--radius-lg); text-align: center; display: flex; flex-direction: column; align-items: center; position: relative;">
+                        <span style="position: absolute; top: -10px; right: 20px; background: #DBEAFE; color: var(--clr-secondary); font-size: 0.65rem; font-weight: 800; padding: 4px 8px; border-radius: 12px; z-index: 2;">COMING SOON</span>
+                        <div style="width: 64px; height: 64px; border-radius: 50%; background: #F1F5F9; color: var(--clr-text-muted); display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem;">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+                        </div>
+                        <h3 style="font-size: 1.15rem; color: var(--clr-text-muted); margin-bottom: 0.5rem; line-height: 1.4;">Blockchain Fundamental</h3>
+                        <p style="color: var(--clr-text-muted); font-size: 0.9rem; line-height: 1.5;">Pahami cara kerja Web3 dan teknologi terdesentralisasi.</p>
+                    </div>
+                </div>
+
+                <!-- Prev/Next Navigation Buttons -->
+                <div style="display: flex; justify-content: flex-end; gap: 0.75rem; margin-top: 1rem; padding-right: 1rem;">
+                    <button onclick="document.getElementById('course-carousel').scrollBy({ left: -304, behavior: 'smooth' })" aria-label="Previous" style="width: 44px; height: 44px; padding: 0; display: flex; align-items: center; justify-content: center; border-radius: 50%; border: 1px solid var(--clr-border); background: white; color: var(--clr-text-main); cursor: pointer; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); transition: all 0.2s ease;">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+                    </button>
+                    <button onclick="document.getElementById('course-carousel').scrollBy({ left: 304, behavior: 'smooth' })" aria-label="Next" style="width: 44px; height: 44px; padding: 0; display: flex; align-items: center; justify-content: center; border-radius: 50%; border: 1px solid var(--clr-border); background: white; color: var(--clr-text-main); cursor: pointer; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); transition: all 0.2s ease;">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Career Pathways Section -->
+    <section class="section" style="padding-top: var(--spacing-lg); padding-bottom: var(--spacing-lg);">
+        <div class="container">
+            <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3rem; flex-wrap: wrap; gap: 1rem;">
+                <div style="max-width: 600px;">
+                    <h2 style="margin-bottom: 0.5rem; color: var(--clr-text-main);">Career Pathways</h2>
+                    <p style="font-size: 1.1rem; color: var(--clr-text-muted);">
+                        Rute pembelajaran terstruktur yang dirancang untuk membawa Anda dari pemula hingga siap kerja di bidang spesifik.
+                    </p>
+                </div>
+                <a href="/jalur-karir" style="color: var(--clr-secondary); font-weight: 700; font-size: 0.95rem; text-decoration: none; display: flex; align-items: center; gap: 0.5rem;">
+                    Lihat Semua Jalur ➔
+                </a>
+            </div>
+            
+            <div class="grid grid-2 mobile-carousel" style="gap: 2rem;">
+                <!-- Track 1: AI Generalist -->
+                <div class="white-card" style="padding: 2.5rem; border-radius: var(--radius-lg); display: flex; flex-direction: column;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                        <div style="width: 48px; height: 48px; border-radius: 50%; background: #E2E8F0; display: flex; align-items: center; justify-content: center;">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#64748B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+                        </div>
+                        <span style="background: var(--clr-bg-neu); color: var(--clr-text-muted); font-size: 0.8rem; font-weight: 700; padding: 6px 12px; border-radius: 20px;">4 Bulan</span>
+                    </div>
+                    
+                    <h3 style="font-size: 1.75rem; color: var(--clr-text-main); margin-bottom: 0.75rem;">AI Generalist</h3>
+                    <p style="color: var(--clr-text-muted); font-size: 0.95rem; margin-bottom: 2rem; line-height: 1.6;">
+                        Kuasai fundamental kecerdasan buatan, machine learning, dan implementasinya dalam berbagai skenario bisnis untuk menjadi problem solver modern.
+                    </p>
+                    
+                    <ul style="list-style: none; padding: 0; margin-bottom: 2.5rem; flex-grow: 1; display: flex; flex-direction: column; gap: 1rem; background: var(--clr-bg-neu); padding: 1.5rem; border-radius: var(--radius-sm);">
+                        <li style="display: flex; align-items: center; gap: 0.75rem; font-size: 0.9rem; color: var(--clr-text-main);">
+                            <div style="width: 20px; height: 20px; border-radius: 50%; border: 2px solid var(--clr-secondary); display: flex; align-items: center; justify-content: center; color: var(--clr-secondary);">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                            </div>
+                            Python & Data Fundamentals
+                        </li>
+                        <li style="display: flex; align-items: center; gap: 0.75rem; font-size: 0.9rem; color: var(--clr-text-main);">
+                            <div style="width: 20px; height: 20px; border-radius: 50%; border: 2px solid var(--clr-secondary); display: flex; align-items: center; justify-content: center; color: var(--clr-secondary);">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                            </div>
+                            Machine Learning Basics
+                        </li>
+                        <li style="display: flex; align-items: center; gap: 0.75rem; font-size: 0.9rem; color: var(--clr-text-main);">
+                            <div style="width: 20px; height: 20px; border-radius: 50%; border: 2px solid var(--clr-secondary); display: flex; align-items: center; justify-content: center; color: var(--clr-secondary);">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                            </div>
+                            Generative AI Applications
+                        </li>
+                    </ul>
+                    
+                    <a href="#daftar" class="btn btn-primary btn-full" style="padding: 16px; border-radius: var(--radius-sm); text-transform: none; background-color: var(--clr-secondary); font-size: 1.05rem;">Daftar Pathway</a>
+                </div>
+
+                <!-- Track 2: AI Marketer -->
+                <div class="white-card" style="padding: 2.5rem; border-radius: var(--radius-lg); display: flex; flex-direction: column;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                        <div style="width: 48px; height: 48px; border-radius: 50%; background: #FCE7F3; display: flex; align-items: center; justify-content: center;">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#F43F5E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+                        </div>
+                        <span style="background: var(--clr-bg-neu); color: var(--clr-text-muted); font-size: 0.85rem; font-weight: 700; padding: 6px 12px; border-radius: 20px;">4 Bulan</span>
+                    </div>
+                    
+                    <h3 style="font-size: 1.75rem; color: var(--clr-text-main); margin-bottom: 0.75rem;">AI Marketer</h3>
+                    <p style="color: var(--clr-text-muted); font-size: 0.95rem; margin-bottom: 2rem; line-height: 1.6;">
+                        Pelajari cara memanfaatkan tools AI terbaru untuk meroketkan efisiensi kampanye pemasaran, analisis audiens, dan pembuatan konten.
+                    </p>
+                    
+                    <ul style="list-style: none; padding: 0; margin-bottom: 2.5rem; flex-grow: 1; display: flex; flex-direction: column; gap: 1rem; background: var(--clr-bg-neu); padding: 1.5rem; border-radius: var(--radius-md);">
+                        <li style="display: flex; align-items: center; gap: 0.75rem; font-size: 0.9rem; color: var(--clr-text-main);">
+                            <div style="width: 20px; height: 20px; border-radius: 50%; border: 2px solid var(--clr-secondary); display: flex; align-items: center; justify-content: center; color: var(--clr-secondary);">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                            </div>
+                            AI for Content Creation
+                        </li>
+                        <li style="display: flex; align-items: center; gap: 0.75rem; font-size: 0.9rem; color: var(--clr-text-main);">
+                            <div style="width: 20px; height: 20px; border-radius: 50%; border: 2px solid var(--clr-secondary); display: flex; align-items: center; justify-content: center; color: var(--clr-secondary);">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                            </div>
+                            Predictive Analytics in Ads
+                        </li>
+                        <li style="display: flex; align-items: center; gap: 0.75rem; font-size: 0.9rem; color: var(--clr-text-main);">
+                            <div style="width: 20px; height: 20px; border-radius: 50%; border: 2px solid var(--clr-secondary); display: flex; align-items: center; justify-content: center; color: var(--clr-secondary);">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                            </div>
+                            Automated Campaign Management
+                        </li>
+                    </ul>
+                    
+                    <a href="#silabus" class="btn btn-outline btn-full" style="padding: 16px; border-radius: var(--radius-sm); text-transform: none; color: var(--clr-secondary); border-color: var(--clr-secondary); font-size: 1.05rem;">Pelajari Silabus</a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Promo Banner -->
+    <section class="section" style="padding-top: var(--spacing-md); padding-bottom: var(--spacing-lg);">
+        <div class="container">
+            <div class="promo-banner-container" style="background-color: #0F172A; border-radius: var(--radius-lg); color: white; position: relative; overflow: hidden;">
+                <div style="position: absolute; top: 0; right: 0; width: 50%; height: 100%; background: radial-gradient(circle at top right, rgba(249, 115, 22, 0.15) 0%, transparent 70%); pointer-events: none;"></div>
+                
+                <div class="promo-banner-content" style="position: relative; z-index: 1;">
+                    <span style="background: #F97316; color: white; padding: 6px 12px; border-radius: 4px; font-size: 0.75rem; font-weight: 800; letter-spacing: 1px; display: inline-block; margin-bottom: 1rem;">🔥 KUOTA TERBATAS</span>
+                    <h2 style="margin-bottom: 1rem; color: white;">Beasiswa Talenta Digital</h2>
+                    <p style="font-size: 1.1rem; opacity: 0.9; margin-bottom: 2rem; line-height: 1.6;">Dapatkan potongan hingga 90% untuk program Jalur Karir AI. Kuota terbatas untuk promo launching Vokasi.</p>
+                    
+                    <div style="display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.5rem; max-width: 400px; color: rgba(255,255,255,0.7);">
+                        <span>Kuota Terisi</span>
+                        <span>84%</span>
+                    </div>
+                    <div style="height: 8px; background: rgba(255,255,255,0.2); border-radius: 4px; overflow: hidden; max-width: 400px;">
+                        <div style="width: 84%; height: 100%; background: #F97316; border-radius: 4px;"></div>
+                    </div>
+                </div>
+                
+                <div style="position: relative; z-index: 1;">
+                    <a href="#daftar" class="btn" style="background-color: #F97316; color: white; border: none; padding: 16px 40px; font-size: 1.1rem; border-radius: var(--radius-sm); text-transform: none; font-weight: 800;">Klaim Promo</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Proof Section -->
+    <section class="section" style="padding-top: var(--spacing-lg); padding-bottom: var(--spacing-lg);">
+        <div class="container text-center">
+            <h2 style="font-size: 2rem; margin-bottom: 2rem;">Verified by 30 Years Experience</h2>
+            
+            <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 2rem; background: var(--clr-white); border-radius: var(--radius-lg); padding: 2rem; border: 1px solid var(--clr-border); max-width: 800px; margin: 0 auto;">
+                <div style="display: flex; align-items: center;">
+                    <img src="https://i.pravatar.cc/100?img=11" alt="User 1" style="width: 56px; height: 56px; border-radius: 50%; border: 3px solid white; z-index: 3;" loading="lazy" decoding="async">
+                    <img src="https://i.pravatar.cc/100?img=12" alt="User 2" style="width: 56px; height: 56px; border-radius: 50%; border: 3px solid white; margin-left: -20px; z-index: 2;" loading="lazy" decoding="async">
+                    <img src="https://i.pravatar.cc/100?img=13" alt="User 3" style="width: 56px; height: 56px; border-radius: 50%; border: 3px solid white; margin-left: -20px; z-index: 1;" loading="lazy" decoding="async">
+                    <div style="width: 56px; height: 56px; border-radius: 50%; background: #E2E8F0; border: 3px solid white; margin-left: -20px; z-index: 0; display: flex; align-items: center; justify-content: center; font-weight: 700; color: var(--clr-text-muted);">+12</div>
+                </div>
+                <div style="width: 1px; height: 60px; background: var(--clr-border);"></div>
+                <p style="text-align: left; font-size: 1.05rem; color: var(--clr-text-muted); max-width: 300px; line-height: 1.6;">
+                    Kurikulum kami dirancang oleh para praktisi dari perusahaan teknologi terkemuka di Indonesia dan global.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="section" style="padding-top: var(--spacing-lg); padding-bottom: var(--spacing-lg); background-color: var(--clr-bg-alt);">
+        <div class="container" style="max-width: 800px;">
+            <div class="text-center" style="margin-bottom: 3rem;">
+                <h2 style="margin-bottom: 1rem;">FAQ</h2>
+                <p style="font-size: 1.1rem; color: var(--clr-text-muted);">Pertanyaan yang sering diajukan mengenai program kami.</p>
+            </div>
+            
+            <div class="faq-list">
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        Apakah ada prasyarat untuk mengikuti bootcamp?
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer"><p>Tidak ada prasyarat khusus, program ini dirancang dari pemula hingga siap kerja.</p></div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        Bagaimana sistem penyaluran kerja di Vokasi?
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer"><p>Kami memiliki ratusan hiring partner yang terhubung langsung dengan platform karir kami.</p></div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        Apakah sertifikat diakui oleh industri?
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer"><p>Ya, sertifikat Vokasi diterbitkan berdasarkan standar SKKNI dan diakui secara luas di Asia Tenggara.</p></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Misi Kami Section -->
+    <section class="section" style="padding-top: var(--spacing-xl); padding-bottom: var(--spacing-xl); text-align: center;">
+        <div class="container" style="max-width: 800px;">
+            <div style="width: 72px; height: 72px; border-radius: 50%; background: #EFF6FF; color: var(--clr-secondary); display: flex; align-items: center; justify-content: center; margin: 0 auto 2rem auto;">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><m12 15 3.5-3.5/><path d="m15 5 4 4"/><path d="m17 7-9.5 9.5"/><path d="m8.5 12 4 4"/></svg>
+            </div>
+            <h2 style="margin-bottom: 1.5rem;">Misi Kami</h2>
+            <p style="font-size: 1.15rem; color: var(--clr-text-muted); line-height: 1.7; margin-bottom: 2.5rem;">
+                Vokasi berfokus untuk menjembatani kesenjangan keterampilan antara dunia akademis dan kebutuhan industri. Melalui platform yang mengutamakan kemudahan dan kepercayaan, kami memberdayakan talenta Indonesia untuk meraih potensi maksimal mereka.
+            </p>
+            <a href="/contact" class="btn btn-primary" style="padding: 14px 32px; border-radius: var(--radius-sm); font-size: 1.05rem; background-color: var(--clr-secondary); border: none;">Kolaborasi dengan Kami</a>
+        </div>
+    </section>
+
+<%- include('../partials/footer') %>

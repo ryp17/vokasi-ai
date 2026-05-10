@@ -1,0 +1,102 @@
+<%- include('../partials/head', { pageTitle: 'Blog | Vokasi' }) %>
+
+    <!-- Page Hero -->
+    <section class="section" style="padding-top: calc(var(--spacing-xl) + var(--header-height)); padding-bottom: var(--spacing-xl); background-color: var(--clr-bg);">
+        <div class="container text-center" style="max-width: 800px;">
+            <h1 style="margin-bottom: var(--spacing-sm); color: var(--clr-text-main);">Wawasan & Pembelajaran</h1>
+            <p style="font-size: 1.15rem; color: var(--clr-text-muted); margin-bottom: 2.5rem; line-height: 1.6;">
+                Temukan artikel, panduan, dan pemikiran terbaru kami tentang dunia pendidikan digital.
+            </p>
+            
+            <form style="display: flex; gap: 0.5rem; max-width: 600px; margin: 0 auto;">
+                <input type="text" placeholder="Cari artikel..." style="flex-grow: 1; padding: 14px 20px; border-radius: var(--radius-sm); border: 1px solid var(--clr-border); font-family: var(--font-primary); font-size: 1rem;">
+                <button type="submit" class="btn btn-primary" style="padding: 14px 32px; border-radius: var(--radius-sm); background-color: var(--clr-secondary); border: none; font-weight: 600;">Cari</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Blog Posts -->
+    <section class="section" style="padding-top: 0; background-color: var(--clr-bg); padding-bottom: var(--spacing-xl);">
+        <div class="container">
+            <h2 style="font-size: 2rem; color: var(--clr-text-main); margin-bottom: 2rem;">Artikel Terbaru</h2>
+            
+            <div class="grid grid-3 grid-stack-md" style="gap: 2rem; margin-bottom: 3rem;">
+                
+                <!-- Card 1 -->
+                <div class="white-card" style="padding: 0; border-radius: var(--radius-lg); overflow: hidden; display: flex; flex-direction: column;">
+                    <div style="height: 200px; background-color: #e2e8f0; position: relative;">
+                        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Panduan" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy" decoding="async">
+                        <span style="position: absolute; top: 1rem; left: 1rem; background: var(--clr-white); color: var(--clr-secondary); font-size: 0.75rem; font-weight: 800; padding: 6px 12px; border-radius: 20px; letter-spacing: 0.5px;">PANDUAN</span>
+                    </div>
+                    <div style="padding: 1.5rem; flex-grow: 1; display: flex; flex-direction: column;">
+                        <h3 style="font-size: 1.25rem; color: var(--clr-text-main); margin-bottom: 0.5rem; line-height: 1.4;">Panduan Memilih Bootcamp yang Tepat</h3>
+                        <p style="color: var(--clr-text-muted); font-size: 0.85rem; margin-bottom: 1rem;">Oleh Sarah Wijaya • 12 Okt 2023</p>
+                        <p style="color: var(--clr-text-muted); font-size: 0.95rem; line-height: 1.6; margin-bottom: 1.5rem; flex-grow: 1;">
+                            Memilih bootcamp bisa menjadi tugas yang membingungkan. Artikel ini akan membantu Anda memahami kriteria penting sebelum memutuskan berinvestasi.
+                        </p>
+                        <a href="#" style="color: var(--clr-secondary); font-weight: 600; text-decoration: none; font-size: 0.95rem; display: flex; align-items: center; gap: 0.5rem;">Baca Selengkapnya ➔</a>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="white-card" style="padding: 0; border-radius: var(--radius-lg); overflow: hidden; display: flex; flex-direction: column;">
+                    <div style="height: 200px; background-color: #e2e8f0; position: relative;">
+                        <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Desain" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy" decoding="async">
+                        <span style="position: absolute; top: 1rem; left: 1rem; background: var(--clr-white); color: var(--clr-secondary); font-size: 0.75rem; font-weight: 800; padding: 6px 12px; border-radius: 20px; letter-spacing: 0.5px;">DESAIN</span>
+                    </div>
+                    <div style="padding: 1.5rem; flex-grow: 1; display: flex; flex-direction: column;">
+                        <h3 style="font-size: 1.25rem; color: var(--clr-text-main); margin-bottom: 0.5rem; line-height: 1.4;">Tren UI/UX di Tahun 2024</h3>
+                        <p style="color: var(--clr-text-muted); font-size: 0.85rem; margin-bottom: 1rem;">Oleh Anita Larasati • 05 Okt 2023</p>
+                        <p style="color: var(--clr-text-muted); font-size: 0.95rem; line-height: 1.6; margin-bottom: 1.5rem; flex-grow: 1;">
+                            Apa saja tren desain yang akan mendominasi tahun depan? Simak rangkuman kami dari berbagai ahli industri.
+                        </p>
+                        <a href="#" style="color: var(--clr-secondary); font-weight: 600; text-decoration: none; font-size: 0.95rem; display: flex; align-items: center; gap: 0.5rem;">Baca Selengkapnya ➔</a>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="white-card" style="padding: 0; border-radius: var(--radius-lg); overflow: hidden; display: flex; flex-direction: column;">
+                    <div style="height: 200px; background-color: #e2e8f0; position: relative;">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Teknologi" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy" decoding="async">
+                        <span style="position: absolute; top: 1rem; left: 1rem; background: var(--clr-white); color: var(--clr-secondary); font-size: 0.75rem; font-weight: 800; padding: 6px 12px; border-radius: 20px; letter-spacing: 0.5px;">TEKNOLOGI</span>
+                    </div>
+                    <div style="padding: 1.5rem; flex-grow: 1; display: flex; flex-direction: column;">
+                        <h3 style="font-size: 1.25rem; color: var(--clr-text-main); margin-bottom: 0.5rem; line-height: 1.4;">Mengapa Data Science Semakin Dibutuhkan?</h3>
+                        <p style="color: var(--clr-text-muted); font-size: 0.85rem; margin-bottom: 1rem;">Oleh Budi Santoso • 28 Sep 2023</p>
+                        <p style="color: var(--clr-text-muted); font-size: 0.95rem; line-height: 1.6; margin-bottom: 1.5rem; flex-grow: 1;">
+                            Data telah menjadi aset berharga bagi perusahaan modern. Inilah alasan mengapa permintaan talenta data meningkat tajam.
+                        </p>
+                        <a href="#" style="color: var(--clr-secondary); font-weight: 600; text-decoration: none; font-size: 0.95rem; display: flex; align-items: center; gap: 0.5rem;">Baca Selengkapnya ➔</a>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Pagination -->
+            <div style="display: flex; justify-content: center; align-items: center; gap: 0.5rem;">
+                <button style="width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--clr-border); background: white; color: var(--clr-text-muted); display: flex; align-items: center; justify-content: center; cursor: pointer; font-family: var(--font-primary);">
+                    &lt;&lt;
+                </button>
+                <button style="width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--clr-border); background: white; color: var(--clr-text-muted); display: flex; align-items: center; justify-content: center; cursor: pointer; font-family: var(--font-primary);">
+                    &lt;
+                </button>
+                <button style="width: 40px; height: 40px; border-radius: 50%; border: none; background: var(--clr-secondary); color: white; display: flex; align-items: center; justify-content: center; cursor: pointer; font-family: var(--font-primary); font-weight: 700;">
+                    1
+                </button>
+                <button style="width: 40px; height: 40px; border-radius: 50%; border: 1px solid white; background: transparent; color: var(--clr-text-main); display: flex; align-items: center; justify-content: center; cursor: pointer; font-family: var(--font-primary);">
+                    2
+                </button>
+                <button style="width: 40px; height: 40px; border-radius: 50%; border: 1px solid white; background: transparent; color: var(--clr-text-main); display: flex; align-items: center; justify-content: center; cursor: pointer; font-family: var(--font-primary);">
+                    3
+                </button>
+                <button style="width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--clr-border); background: white; color: var(--clr-text-muted); display: flex; align-items: center; justify-content: center; cursor: pointer; font-family: var(--font-primary);">
+                    &gt;
+                </button>
+                <button style="width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--clr-border); background: white; color: var(--clr-text-muted); display: flex; align-items: center; justify-content: center; cursor: pointer; font-family: var(--font-primary);">
+                    &gt;&gt;
+                </button>
+            </div>
+        </div>
+    </section>
+
+<%- include('../partials/footer') %>
