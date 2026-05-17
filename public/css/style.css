@@ -541,7 +541,13 @@ select.form-control {
 
 /* Mobile Responsiveness */
 @media (max-width: 900px) {
-    .section { padding: var(--spacing-md) 0; }
+    .section { 
+        padding-top: var(--spacing-md) !important;
+        padding-bottom: var(--spacing-md) !important;
+    }
+    .section:first-of-type {
+        padding-top: calc(var(--spacing-md) + var(--header-height)) !important;
+    }
 
     /* WhatsApp button smaller on mobile */
     #wa-cta {

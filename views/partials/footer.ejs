@@ -4,7 +4,7 @@
             <div class="grid footer-grid" style="gap: 2rem; align-items: start;">
                 <!-- Column 1: Brand & Desc -->
                 <div>
-                    <a href="/" class="logo-link" style="font-size: 1.5rem; margin-bottom: 1rem; display: inline-block;">Vokasi</a>
+                    <a href="/" class="logo-link" style="font-size: 1.5rem; margin-bottom: 1rem; display: inline-block;">Vokasi.ai</a>
                     <p style="color: var(--clr-text-muted); font-size: 0.9rem; margin-bottom: 2rem; max-width: 280px; line-height: 1.6;">
                         Platform e-learning modern yang didesain untuk membantu Anda mencapai potensi maksimal dalam karir profesional Anda.
                     </p>
@@ -97,81 +97,87 @@
     " role="status" aria-live="polite"></div>
 
     <script>
-        // --- Toast Utility ---
-        function showToast(message, isError = false) {
-            const toast = document.getElementById('toast');
-            toast.textContent = message;
-            toast.style.background = isError ? '#c0392b' : 'var(--clr-secondary)';
-            toast.style.transform = 'translateX(-50%) translateY(0)';
-            setTimeout(() => {
-                toast.style.transform = 'translateX(-50%) translateY(120px)';
-            }, 4000);
-        }
+        (() => {
+            // --- Toast Utility ---
+            function showToast(message, isError = false) {
+                const toast = document.getElementById('toast');
+                if (!toast) return;
+                toast.textContent = message;
+                toast.style.background = isError ? '#c0392b' : 'var(--clr-secondary)';
+                toast.style.transform = 'translateX(-50%) translateY(0)';
+                setTimeout(() => {
+                    toast.style.transform = 'translateX(-50%) translateY(120px)';
+                }, 4000);
+            }
 
-        // --- AJAX Form Submission ---
-        const applyForm = document.getElementById('applyForm');
-        const submitBtn = document.getElementById('submitBtn');
-        if (applyForm) {
-            applyForm.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                submitBtn.textContent = 'Mengirim...';
-                submitBtn.disabled = true;
+            // Make showToast available globally if needed by other scripts
+            window.showToast = showToast;
 
-                try {
-                    const formData = new FormData(applyForm);
-                    const body = Object.fromEntries(formData.entries());
-                    const res = await fetch('/api/apply', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(body),
-                    });
-                    const data = await res.json();
-                    if (res.ok && data.success) {
-                        showToast('✅ Pengajuan berhasil! Kami akan menghubungi Anda segera.');
-                        applyForm.reset();
-                    } else {
-                        showToast('❌ Terjadi kesalahan. Coba lagi.', true);
+            // --- AJAX Form Submission ---
+            const applyForm = document.getElementById('applyForm');
+            const submitBtn = document.getElementById('submitBtn');
+            if (applyForm && submitBtn) {
+                applyForm.addEventListener('submit', async (e) => {
+                    e.preventDefault();
+                    submitBtn.textContent = 'Mengirim...';
+                    submitBtn.disabled = true;
+
+                    try {
+                        const formData = new FormData(applyForm);
+                        const body = Object.fromEntries(formData.entries());
+                        const res = await fetch('/api/apply', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(body),
+                        });
+                        const data = await res.json();
+                        if (res.ok && data.success) {
+                            showToast('✅ Pengajuan berhasil! Kami akan menghubungi Anda segera.');
+                            applyForm.reset();
+                        } else {
+                            showToast('❌ Terjadi kesalahan. Coba lagi.', true);
+                        }
+                    } catch (err) {
+                        showToast('❌ Koneksi gagal. Periksa internet Anda.', true);
+                    } finally {
+                        submitBtn.textContent = 'AJUKAN BEASISWA';
+                        submitBtn.disabled = false;
                     }
-                } catch (err) {
-                    showToast('❌ Koneksi gagal. Periksa internet Anda.', true);
-                } finally {
-                    submitBtn.textContent = 'AJUKAN BEASISWA';
-                    submitBtn.disabled = false;
-                }
-            });
-        }
+                });
+            }
 
-        // --- Mobile Nav Toggle ---
-        const toggleBtn = document.querySelector('.mobile-toggle');
-        const nav = document.querySelector('.main-nav');
-        if (toggleBtn && nav) {
-            toggleBtn.addEventListener('click', () => {
-                nav.classList.toggle('active');
-            });
-            // Close nav when any nav link is clicked (mobile)
-            nav.querySelectorAll('a').forEach(link => {
-                link.addEventListener('click', () => {
-                    nav.classList.remove('active');
+            // --- Mobile Nav Toggle ---
+            const toggleBtn = document.querySelector('.mobile-toggle');
+            const nav = document.querySelector('.main-nav');
+            if (toggleBtn && nav) {
+                toggleBtn.addEventListener('click', () => {
+                    nav.classList.toggle('active');
+                });
+                // Close nav when any nav link is clicked (mobile)
+                nav.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', () => {
+                        nav.classList.remove('active');
+                    });
+                });
+            }
+
+            // --- FAQ Accordion ---
+            document.querySelectorAll('.faq-question').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const isOpen = btn.getAttribute('aria-expanded') === 'true';
+                    // Close all
+                    document.querySelectorAll('.faq-question').forEach(b => {
+                        b.setAttribute('aria-expanded', 'false');
+                        b.nextElementSibling.classList.remove('open');
+                    });
+                    // Open clicked if it was closed
+                    if (!isOpen) {
+                        btn.setAttribute('aria-expanded', 'true');
+                        btn.nextElementSibling.classList.add('open');
+                    }
                 });
             });
-        }
-
-        // --- FAQ Accordion ---
-        document.querySelectorAll('.faq-question').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const isOpen = btn.getAttribute('aria-expanded') === 'true';
-                // Close all
-                document.querySelectorAll('.faq-question').forEach(b => {
-                    b.setAttribute('aria-expanded', 'false');
-                    b.nextElementSibling.classList.remove('open');
-                });
-                // Open clicked if it was closed
-                if (!isOpen) {
-                    btn.setAttribute('aria-expanded', 'true');
-                    btn.nextElementSibling.classList.add('open');
-                }
-            });
-        });
+        })();
     </script>
 </body>
 </html>
