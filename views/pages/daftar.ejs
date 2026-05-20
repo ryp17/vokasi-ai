@@ -188,6 +188,42 @@
         }
     }
 
+    window.addEventListener('DOMContentLoaded', () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const type = urlParams.get('type');
+        const slug = urlParams.get('slug');
+
+        if (type) {
+            const radioInput = document.querySelector(`input[name="programType"][value="${type}"]`);
+            if (radioInput) {
+                radioInput.checked = true;
+                toggleProgramSelect();
+
+                if (slug) {
+                    const slugMap = {
+                        'online-marketing-fundamental': 'Online Marketing Fundamental',
+                        'social-media-fundamental': 'Social Media Fundamental',
+                        'cyber-security': 'Cyber Security',
+                        'performance-marketing': 'Performance Marketing',
+                        'blockchain-fundamental': 'Blockchain Fundamental',
+                        'product-management': 'Product Management',
+                        'ai-generalist': 'AI Generalist',
+                        'ai-marketer': 'AI Marketer'
+                    };
+
+                    const targetValue = slugMap[slug.toLowerCase()];
+                    if (targetValue) {
+                        if (type === 'kursus') {
+                            document.getElementById('kursusOption').value = targetValue;
+                        } else if (type === 'pathway') {
+                            document.getElementById('pathwayOption').value = targetValue;
+                        }
+                    }
+                }
+            }
+        }
+    });
+
     const regForm = document.getElementById('mainRegistrationForm');
     const submitRegBtn = document.getElementById('submitRegBtn');
     if (regForm) {

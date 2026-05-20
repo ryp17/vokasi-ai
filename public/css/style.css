@@ -752,3 +752,180 @@ select.form-control {
     line-height: 1.7;
     font-size: 0.95rem;
 }
+
+/* Responsive Spacing & Layout Overrides */
+@media (max-width: 768px) {
+    :root {
+        --spacing-xl: 3rem !important;
+        --spacing-lg: 2rem !important;
+        --spacing-md: 1.5rem !important;
+    }
+    
+    .hero-section {
+        padding-top: calc(var(--spacing-xl) + var(--header-height)) !important;
+        padding-bottom: var(--spacing-md) !important;
+    }
+
+    .hero-text-container {
+        text-align: center;
+    }
+    
+    .hero-btn-group {
+        justify-content: center !important;
+    }
+}
+
+.hero-section {
+    padding-top: calc(var(--spacing-xl) + var(--header-height));
+    padding-bottom: var(--spacing-lg);
+}
+
+.section-bg-alt {
+    background-color: var(--clr-bg-alt) !important;
+}
+
+.section-misi {
+    padding-top: var(--spacing-xl);
+    padding-bottom: var(--spacing-xl);
+    text-align: center;
+}
+
+/* Trust badge & Hero styling */
+.hero-trust-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: #F1F5F9;
+    color: var(--clr-text-muted);
+    padding: 8px 16px;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+}
+
+.hero-btn-group {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 1rem;
+}
+
+.hero-btn-group .btn {
+    padding: 16px 32px;
+    border-radius: var(--radius-sm);
+    font-size: 1.05rem;
+}
+
+.hero-btn-group .btn-primary {
+    background-color: var(--clr-secondary);
+    border: none;
+}
+
+.hero-btn-group .btn-outline {
+    border-color: var(--clr-border);
+    color: var(--clr-text-main);
+}
+
+.hero-trust-bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 2rem;
+    margin-top: 2.5rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--clr-border);
+}
+
+/* AI Labs Card progress blocks */
+.labs-card-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.labs-icon-container {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: var(--clr-secondary);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.labs-progress-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.labs-progress-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.labs-progress-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #EFF6FF;
+    color: var(--clr-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.labs-progress-icon.inactive {
+    background: var(--clr-bg-neu);
+    color: var(--clr-text-muted);
+}
+
+.labs-progress-bar-wrapper {
+    flex-grow: 1;
+}
+
+.labs-progress-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--clr-text-main);
+    margin-bottom: 0.3rem;
+}
+
+.labs-progress-bg {
+    height: 8px;
+    background: #E2E8F0;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.labs-progress-fill {
+    height: 100%;
+    background: var(--clr-secondary);
+}
+
+.labs-card-footer {
+    display: block;
+    text-align: center;
+    color: var(--clr-secondary);
+    font-weight: 700;
+    font-size: 0.95rem;
+    text-decoration: none;
+    border-top: 1px solid var(--clr-border);
+    padding-top: 1.5rem;
+}
+
+/* Mobile carousel responsiveness additions */
+@media (max-width: 480px) {
+    .mobile-carousel > * {
+        flex: 0 0 85vw !important;
+        max-width: 85vw !important;
+    }
+}
