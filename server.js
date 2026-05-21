@@ -182,7 +182,7 @@ app.post('/api/apply', (req, res) => {
 
     // --- Affiliate Tracking Attribution ---
     try {
-        const refCode = getCookie(req, 'vokasi_ref') || req.body.refCode;
+        const refCode = getCookie(req, 'vokasi_ref') || req.body.refCode || req.body.couponCode;
         if (refCode) {
             const affiliate = Database.getAffiliateByCode(refCode);
             if (affiliate && affiliate.status === 'approved') {
@@ -248,9 +248,25 @@ app.post('/api/affiliate/register', (req, res) => {
 
 // POST /api/affiliate/click - Record affiliate link click
 app.post('/api/affiliate/click', (req, res) => {
-    const { code } = req.body;
+    const { code, visitorUuid } = req.body;
+    
+    // Bot & Crawler filtering
+    const userAgent = req.headers['user-agent'] || '';
+    const BOT_PATTERNS = [
+        /bot/i, /crawler/i, /spider/i, /facebookexternalhit/i, 
+        /whatsapp/i, /telegram/i, /slack/i, /twitter/i, /discord/i
+    ];
+    const isBot = BOT_PATTERNS.some(regex => regex.test(userAgent));
+    
+    if (isBot) {
+        // Return 200 OK so bots/crawlers are satisfied, but do NOT log the click
+        return res.json({ success: true, duplicate: true, botDetected: true });
+    }
+
+    const ip = req.ip || req.headers['x-forwarded-for'] || req.connection.remoteAddress || '';
+
     if (code) {
-        Database.incrementClicks(code);
+        Database.logClick(code, visitorUuid, ip, userAgent);
         return res.json({ success: true });
     }
     res.status(400).json({ success: false, error: 'Missing code' });

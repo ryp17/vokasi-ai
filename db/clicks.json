@@ -1,0 +1,20 @@
+[
+  {
+    "id": "clk_icnemicg6",
+    "affiliateId": "aff_pd9p95wc7",
+    "visitorUuid": "v_test_1779375826897",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0",
+    "isUnique": true,
+    "createdAt": "2026-05-21T15:03:46.916Z"
+  },
+  {
+    "id": "clk_rvypcf38f",
+    "affiliateId": "aff_pd9p95wc7",
+    "visitorUuid": "v_test_1779375826897",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0",
+    "isUnique": false,
+    "createdAt": "2026-05-21T15:03:46.921Z"
+  }
+]

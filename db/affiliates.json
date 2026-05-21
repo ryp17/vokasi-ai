@@ -8,7 +8,7 @@
     "paymentAccount": "BCA - 8830129482",
     "referralCode": "AHMADSMK",
     "gotongRoyongGroup": "SMKN 2 Bandung",
-    "clicks": 142,
+    "clicks": 145,
     "createdAt": "2026-05-01T08:00:00.000Z"
   },
   {
@@ -34,5 +34,17 @@
     "gotongRoyongGroup": "Umum",
     "clicks": 12,
     "createdAt": "2026-05-20T14:15:00.000Z"
+  },
+  {
+    "id": "aff_pd9p95wc7",
+    "name": "Hardening Tester",
+    "email": "test@hardening.com",
+    "status": "pending",
+    "paymentMethod": "GoPay",
+    "paymentAccount": "123",
+    "referralCode": "HARDENTEST",
+    "gotongRoyongGroup": "Umum",
+    "clicks": 4,
+    "createdAt": "2026-05-21T15:02:18.301Z"
   }
 ]

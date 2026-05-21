@@ -11,7 +11,8 @@ if (!fs.existsSync(DB_DIR)) {
 const FILES = {
   affiliates: path.join(DB_DIR, 'affiliates.json'),
   referrals: path.join(DB_DIR, 'referrals.json'),
-  payouts: path.join(DB_DIR, 'payouts.json')
+  payouts: path.join(DB_DIR, 'payouts.json'),
+  clicks: path.join(DB_DIR, 'clicks.json')
 };
 
 // Initialize database files with empty arrays if they don't exist
@@ -115,13 +116,54 @@ const Database = {
     return affiliates[idx];
   },
 
-  incrementClicks(code) {
+  // --- CLICKS TABLE ---
+  getClicks() {
+    return readData('clicks');
+  },
+
+  logClick(code, visitorUuid, ip, userAgent) {
     const affiliates = this.getAffiliates();
     const idx = affiliates.findIndex(a => a.referralCode.toUpperCase() === code.toUpperCase());
-    if (idx !== -1) {
+    if (idx === -1) return false;
+
+    const affiliateId = affiliates[idx].id;
+    const clicks = this.getClicks();
+    const now = new Date();
+    const twentyFourHoursAgo = new Date(now.getTime() - 24 * 60 * 60 * 1000);
+
+    // Check for duplicate in the last 24 hours
+    const isDuplicate = clicks.some(c => {
+      if (c.affiliateId !== affiliateId) return false;
+      const clickTime = new Date(c.createdAt);
+      if (clickTime < twentyFourHoursAgo) return false;
+      
+      // Match by exact UUID or by IP + UserAgent fingerprint
+      if (visitorUuid && c.visitorUuid === visitorUuid) return true;
+      if (ip && userAgent && c.ip === ip && c.userAgent === userAgent) return true;
+      
+      return false;
+    });
+
+    // Record the hit regardless for audit
+    const newClick = {
+      id: 'clk_' + Math.random().toString(36).substr(2, 9),
+      affiliateId,
+      visitorUuid: visitorUuid || '',
+      ip: ip || '',
+      userAgent: userAgent || '',
+      isUnique: !isDuplicate,
+      createdAt: now.toISOString()
+    };
+    clicks.push(newClick);
+    writeData('clicks', clicks);
+
+    // Only increment stats if unique
+    if (!isDuplicate) {
       affiliates[idx].clicks = (affiliates[idx].clicks || 0) + 1;
       writeData('affiliates', affiliates);
     }
+
+    return !isDuplicate;
   },
 
   // --- REFERRALS TABLE ---
