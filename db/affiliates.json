@@ -1,0 +1,38 @@
+[
+  {
+    "id": "aff_ahmad",
+    "name": "Ahmad Faisal (Guru SMK)",
+    "email": "ahmad.faisal@smk.sch.id",
+    "status": "approved",
+    "paymentMethod": "Bank Transfer",
+    "paymentAccount": "BCA - 8830129482",
+    "referralCode": "AHMADSMK",
+    "gotongRoyongGroup": "SMKN 2 Bandung",
+    "clicks": 142,
+    "createdAt": "2026-05-01T08:00:00.000Z"
+  },
+  {
+    "id": "aff_siti",
+    "name": "Siti Rahma (Student Leader)",
+    "email": "siti.rahma@univ.ac.id",
+    "status": "approved",
+    "paymentMethod": "GoPay",
+    "paymentAccount": "081234567890",
+    "referralCode": "SITISTUDENT",
+    "gotongRoyongGroup": "HMTI Universitas Indonesia",
+    "clicks": 348,
+    "createdAt": "2026-05-05T09:30:00.000Z"
+  },
+  {
+    "id": "aff_dian",
+    "name": "Dian Wijaya (Professional Mentor)",
+    "email": "dian.w@career.io",
+    "status": "pending",
+    "paymentMethod": "OVO",
+    "paymentAccount": "082198765432",
+    "referralCode": "DIANMENTOR",
+    "gotongRoyongGroup": "Umum",
+    "clicks": 12,
+    "createdAt": "2026-05-20T14:15:00.000Z"
+  }
+]

@@ -1,0 +1,270 @@
+<%- include('../partials/head') %>
+
+<!-- Link Affiliate specific styles -->
+<link rel="stylesheet" href="/css/affiliate.css">
+
+<div class="container" style="padding: 2rem 1.5rem;">
+    <!-- Admin Title Header -->
+    <div style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); color: white; padding: 2rem; border-radius: var(--radius-lg); margin-bottom: 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem;">
+        <div>
+            <span style="background: #3b82f6; color: white; font-size: 0.75rem; font-weight: 700; padding: 0.25rem 0.6rem; border-radius: 4px; text-transform: uppercase;">ADMIN PORTAL</span>
+            <h1 style="font-size: 1.85rem; font-weight: 800; margin-top: 0.5rem;">Affiliate Control Center</h1>
+        </div>
+        <a href="/affiliate" class="btn btn-outline" style="border-color: rgba(255,255,255,0.2); color: white; padding: 0.5rem 1rem; font-size: 0.85rem; border-radius: var(--radius-sm);">Halaman Utama</a>
+    </div>
+
+    <!-- Admin Analytics Overview -->
+    <div class="admin-header-stats">
+        <div class="stat-card">
+            <span style="font-size: 0.75rem; color: var(--clr-text-muted); font-weight: 700; text-transform: uppercase;">Total Klik Link</span>
+            <div class="stat-val"><%= stats.totalClicks %></div>
+        </div>
+        <div class="stat-card">
+            <span style="font-size: 0.75rem; color: var(--clr-text-muted); font-weight: 700; text-transform: uppercase;">Total Penjualan</span>
+            <div class="stat-val" style="color: #3b82f6;"><%= stats.totalConversions %></div>
+        </div>
+        <div class="stat-card">
+            <span style="font-size: 0.75rem; color: var(--clr-text-muted); font-weight: 700; text-transform: uppercase;">Komisi Pending (Escrow)</span>
+            <div class="stat-val" style="color: #d97706;">Rp <%= stats.totalCommissionEscrow.toLocaleString('id-ID') %></div>
+        </div>
+        <div class="stat-card">
+            <span style="font-size: 0.75rem; color: var(--clr-text-muted); font-weight: 700; text-transform: uppercase;">Pencairan Menunggu</span>
+            <div class="stat-val" style="color: #b91c1c;">Rp <%= stats.totalPayoutsPending.toLocaleString('id-ID') %></div>
+        </div>
+        <div class="stat-card" style="background: #f0fdf4;">
+            <span style="font-size: 0.75rem; color: #15803d; font-weight: 700; text-transform: uppercase;">Pencairan Sukses</span>
+            <div class="stat-val" style="color: #16a34a;">Rp <%= stats.totalPayoutsApproved.toLocaleString('id-ID') %></div>
+        </div>
+    </div>
+
+    <!-- Section: Affiliate Approval & Management -->
+    <section style="margin-bottom: 3rem;">
+        <h2 style="font-size: 1.35rem; font-weight: 800; color: var(--clr-text-main); margin-bottom: 1rem;">1. Manajemen Akun Mitra (Affiliates)</h2>
+        <div class="responsive-table-container">
+            <table class="custom-table">
+                <thead>
+                    <tr>
+                        <th>Mitra</th>
+                        <th>Kode Referal</th>
+                        <th>Grup Gotong Royong</th>
+                        <th>Metode Payout</th>
+                        <th>Tanggal Daftar</th>
+                        <th>Status Akun</th>
+                        <th>Aksi Tindakan</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% if (affiliates.length === 0) { %>
+                        <tr>
+                            <td colspan="7" style="text-align: center; padding: 2rem;">Belum ada mitra terdaftar.</td>
+                        </tr>
+                    <% } else { %>
+                        <% affiliates.reverse().forEach(aff => { %>
+                            <tr>
+                                <td>
+                                    <strong><%= aff.name %></strong><br>
+                                    <small><%= aff.email %></small>
+                                </td>
+                                <td style="font-family: monospace; font-weight: 700;"><%= aff.referralCode %></td>
+                                <td><%= aff.gotongRoyongGroup %></td>
+                                <td><%= aff.paymentMethod %> / <%= aff.paymentAccount %></td>
+                                <td><%= new Date(aff.createdAt).toLocaleDateString('id-ID') %></td>
+                                <td>
+                                    <span class="status-badge status-<%= aff.status %>"><%= aff.status %></span>
+                                </td>
+                                <td>
+                                    <% if (aff.status === 'pending') { %>
+                                        <button onclick="approveAffiliate('<%= aff.id %>', 'approved')" class="btn-sm-action btn-approve">Setujui</button>
+                                        <button onclick="approveAffiliate('<%= aff.id %>', 'suspended')" class="btn-sm-action btn-reject">Tolak</button>
+                                    <% } else if (aff.status === 'approved') { %>
+                                        <button onclick="approveAffiliate('<%= aff.id %>', 'suspended')" class="btn-sm-action btn-reject" style="background: #d97706;">Suspend</button>
+                                    <% } else { %>
+                                        <button onclick="approveAffiliate('<%= aff.id %>', 'approved')" class="btn-sm-action btn-approve">Aktifkan</button>
+                                    <% } %>
+                                </td>
+                            </tr>
+                        <% }) %>
+                    <% } %>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- Section: Payout Approvals -->
+    <section style="margin-bottom: 3rem;">
+        <h2 style="font-size: 1.35rem; font-weight: 800; color: var(--clr-text-main); margin-bottom: 1rem;">2. Permintaan Pencairan Dana (Payouts)</h2>
+        <div class="responsive-table-container">
+            <table class="custom-table">
+                <thead>
+                    <tr>
+                        <th>ID Payout</th>
+                        <th>Mitra</th>
+                        <th>Jumlah Penarikan</th>
+                        <th>Rincian Transfer</th>
+                        <th>Diajukan Pada</th>
+                        <th>Status</th>
+                        <th>Aksi Tindakan</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% if (payouts.length === 0) { %>
+                        <tr>
+                            <td colspan="7" style="text-align: center; padding: 2rem;">Belum ada penarikan dana diajukan.</td>
+                        </tr>
+                    <% } else { %>
+                        <% payouts.reverse().forEach(pay => { %>
+                            <% const aff = affiliates.find(a => a.id === pay.affiliateId); %>
+                            <tr>
+                                <td style="font-family: monospace; font-size: 0.85rem;"><%= pay.id %></td>
+                                <td>
+                                    <strong><%= aff ? aff.name : 'Unknown' %></strong><br>
+                                    <small><%= aff ? aff.email : '' %></small>
+                                </td>
+                                <td style="font-weight: 700; color: var(--clr-text-main);">Rp <%= pay.amount.toLocaleString('id-ID') %></td>
+                                <td><%= pay.payoutDetails %></td>
+                                <td><%= new Date(pay.requestedAt).toLocaleString('id-ID') %></td>
+                                <td>
+                                    <span class="status-badge status-<%= pay.status %>"><%= pay.status %></span>
+                                </td>
+                                <td>
+                                    <% if (pay.status === 'pending') { %>
+                                        <button onclick="payoutAction('<%= pay.id %>', 'approved')" class="btn-sm-action btn-approve">Selesaikan Payout</button>
+                                        <button onclick="payoutAction('<%= pay.id %>', 'rejected')" class="btn-sm-action btn-reject">Tolak</button>
+                                    <% } else { %>
+                                        <small style="color: var(--clr-text-muted);">Proses Selesai</small>
+                                    <% } %>
+                                </td>
+                            </tr>
+                        <% }) %>
+                    <% } %>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- Section: Fraud Audit & Referral Ledger -->
+    <section>
+        <h2 style="font-size: 1.35rem; font-weight: 800; color: var(--clr-text-main); margin-bottom: 1rem;">3. Audit Transaksi Referal & Fraud Detection</h2>
+        <p style="color: var(--clr-text-muted); font-size: 0.9rem; margin-bottom: 1rem;">
+            Tinjau kecocokan IP address pembeli dengan IP pengirim, atau lakukan penarikan komisi (Refund/Fraud mark) jika terbukti curang.
+        </p>
+        <div class="responsive-table-container">
+            <table class="custom-table">
+                <thead>
+                    <tr>
+                        <th>Mitra Pengirim</th>
+                        <th>Detail Pembeli (Lead)</th>
+                        <th>Kelas / Harga</th>
+                        <th>Komisi Rilis</th>
+                        <th>IP Address</th>
+                        <th>Escrow Hold</th>
+                        <th>Status Referal</th>
+                        <th>Aksi Fraud Check</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% if (referrals.length === 0) { %>
+                        <tr>
+                            <td colspan="8" style="text-align: center; padding: 2rem;">Belum ada transaksi referal masuk.</td>
+                        </tr>
+                    <% } else { %>
+                        <% referrals.reverse().forEach(ref => { %>
+                            <% const aff = affiliates.find(a => a.id === ref.affiliateId); %>
+                            <tr>
+                                <td>
+                                    <strong><%= aff ? aff.name : 'Unknown' %></strong><br>
+                                    <small>Code: <%= aff ? aff.referralCode : '' %></small>
+                                </td>
+                                <td>
+                                    <strong><%= ref.leadName %></strong><br>
+                                    <small><%= ref.leadEmail %></small>
+                                </td>
+                                <td>
+                                    <%= ref.courseTitle %><br>
+                                    <small>Rp <%= ref.amountPaid.toLocaleString('id-ID') %></small>
+                                </td>
+                                <td style="font-weight: 700; color: #10b981;">Rp <%= ref.commissionAmount.toLocaleString('id-ID') %></td>
+                                <td style="font-family: monospace; font-size: 0.85rem;"><%= ref.visitorIp %></td>
+                                <td>
+                                    <% const now = new Date(); const isCleared = new Date(ref.unlockedAt) <= now; %>
+                                    <span style="color: <%= isCleared ? '#10b981' : '#d97706' %>; font-weight: 600; font-size: 0.85rem;">
+                                        <%= isCleared ? '✓ Cleared' : '⏳ Escrow (Hold)' %>
+                                    </span>
+                                    <br><small style="font-size: 0.75rem;">Unlocked: <%= new Date(ref.unlockedAt).toLocaleDateString('id-ID') %></small>
+                                </td>
+                                <td>
+                                    <span class="status-badge status-<%= ref.status %>"><%= ref.status %></span>
+                                </td>
+                                <td>
+                                    <% if (ref.status !== 'refunded') { %>
+                                        <button onclick="referralAction('<%= ref.id %>', 'refunded')" class="btn-sm-action btn-reject" style="background: #b91c1c;">Tandai Refund/Fraud</button>
+                                    <% } else { %>
+                                        <button onclick="referralAction('<%= ref.id %>', 'approved')" class="btn-sm-action btn-approve">Kembalikan Valid</button>
+                                    <% } %>
+                                </td>
+                            </tr>
+                        <% }) %>
+                    <% } %>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</div>
+
+<script>
+    // Approve affiliate
+    async function approveAffiliate(id, status) {
+        if (!confirm(`Apakah Anda yakin ingin memproses status kemitraan ini menjadi: ${status}?`)) return;
+        try {
+            const res = await fetch('/api/admin/affiliate/approve', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ id, status })
+            });
+            if (res.ok) {
+                window.showToast && window.showToast('✅ Berhasil memperbarui status mitra.');
+                setTimeout(() => window.location.reload(), 1200);
+            }
+        } catch (e) {
+            window.showToast && window.showToast('❌ Gagal menghubungi server.', true);
+        }
+    }
+
+    // Process payout request
+    async function payoutAction(id, status) {
+        if (!confirm(`Konfirmasi pemrosesan pencairan dana ini menjadi: ${status}?`)) return;
+        try {
+            const res = await fetch('/api/admin/payout/action', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ id, status })
+            });
+            if (res.ok) {
+                window.showToast && window.showToast('✅ Berhasil memproses pengajuan pencairan.');
+                setTimeout(() => window.location.reload(), 1200);
+            }
+        } catch (e) {
+            window.showToast && window.showToast('❌ Gagal memproses payout.', true);
+        }
+    }
+
+    // Flag fraud / refund
+    async function referralAction(id, status) {
+        if (!confirm(`Apakah Anda yakin ingin menandai status referal ini menjadi: ${status}?`)) return;
+        try {
+            const res = await fetch('/api/admin/referral/status', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ id, status })
+            });
+            if (res.ok) {
+                window.showToast && window.showToast('✅ Transaksi referal berhasil diupdate.');
+                setTimeout(() => window.location.reload(), 1200);
+            }
+        } catch (e) {
+            window.showToast && window.showToast('❌ Gagal merubah status referal.', true);
+        }
+    }
+</script>
+
+<%- include('../partials/footer') %>

@@ -1,0 +1,292 @@
+<%- include('../partials/head') %>
+
+<!-- Link Affiliate specific styles -->
+<link rel="stylesheet" href="/css/affiliate.css">
+
+<div class="container" style="padding: 2rem 1.5rem;">
+    <!-- Welcome Header -->
+    <div style="background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); color: white; padding: 2.5rem; border-radius: var(--radius-lg); margin-bottom: 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem;">
+        <div>
+            <h1 style="font-size: 1.85rem; font-weight: 800; margin-bottom: 0.5rem;">Selamat Datang, <%= affiliate.name %>!</h1>
+            <p style="color: #94a3b8; font-size: 0.95rem;">Kelola kemitraan, pantau komisi, dan dukung kemajuan pendidikan vokasi bersama.</p>
+        </div>
+        <div style="display: flex; gap: 1rem; align-items: center;">
+            <div style="text-align: right;">
+                <span style="font-size: 0.75rem; color: #94a3b8; text-transform: uppercase; font-weight: 700; display: block;">Tingkat Kemitraan</span>
+                <span class="tier-badge <%= 'tier-' + stats.currentTier.toLowerCase() %>" style="margin-top: 0.25rem;">
+                    <%= stats.currentTier %>
+                </span>
+            </div>
+            <a href="/affiliate" onclick="document.cookie='vokasi_dashboard_code=; Max-Age=-99999999; path=/;';" class="btn btn-outline" style="border-color: rgba(255,255,255,0.2); color: white; padding: 0.5rem 1rem; font-size: 0.85rem; border-radius: var(--radius-sm);">Keluar</a>
+        </div>
+    </div>
+
+    <!-- Main Dashboard Grid -->
+    <div class="dashboard-layout">
+        <!-- Sidebar Menu -->
+        <aside class="sidebar-nav">
+            <a href="#overview" class="sidebar-nav-link active">📊 Ringkasan</a>
+            <a href="#link-generator" class="sidebar-nav-link">🔗 Tautan Promosi</a>
+            <a href="#gotong-royong" class="sidebar-nav-link">🤝 Gotong Royong</a>
+            <a href="#payout-section" class="sidebar-nav-link">💳 Penarikan Komisi</a>
+            <a href="#referral-list" class="sidebar-nav-link">👥 Riwayat Referal</a>
+        </aside>
+
+        <!-- Dashboard Content -->
+        <main>
+            <!-- Stat Cards Row -->
+            <div class="stat-grid-4" id="overview">
+                <!-- Card 1 -->
+                <div class="stat-card">
+                    <div>
+                        <span style="font-size: 0.85rem; color: var(--clr-text-muted); font-weight: 600; text-transform: uppercase;">Total Klik Tautan</span>
+                        <div class="stat-val"><%= stats.clicks %></div>
+                    </div>
+                </div>
+                <!-- Card 2 -->
+                <div class="stat-card">
+                    <div>
+                        <span style="font-size: 0.85rem; color: var(--clr-text-muted); font-weight: 600; text-transform: uppercase;">Total Konversi</span>
+                        <div class="stat-val"><%= stats.totalSalesCount %></div>
+                    </div>
+                </div>
+                <!-- Card 3 -->
+                <div class="stat-card">
+                    <div>
+                        <span style="font-size: 0.85rem; color: var(--clr-text-muted); font-weight: 600; text-transform: uppercase;">Total Komisi</span>
+                        <div class="stat-val" style="color: #10b981;">Rp <%= stats.totalEarned.toLocaleString('id-ID') %></div>
+                    </div>
+                </div>
+                <!-- Card 4 -->
+                <div class="stat-card" style="border-color: #3b82f6; background: #eff6ff;">
+                    <div>
+                        <span style="font-size: 0.85rem; color: #1e3a8a; font-weight: 700; text-transform: uppercase;">Saldo Tersedia</span>
+                        <div class="stat-val" style="color: #2563eb;">Rp <%= stats.availableBalance.toLocaleString('id-ID') %></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gotong Royong communal goal -->
+            <div class="community-tracker" id="gotong-royong">
+                <div style="display: flex; justify-content: space-between; align-items: start; flex-wrap: wrap; gap: 1rem;">
+                    <div>
+                        <span style="background: #d1fae5; color: #065f46; font-size: 0.75rem; font-weight: 700; padding: 0.25rem 0.6rem; border-radius: 99px; display: inline-block; margin-bottom: 0.5rem;">Gotong Royong Pool</span>
+                        <h3 style="font-size: 1.35rem; font-weight: 800; color: var(--clr-text-main);">Program Kolektif: <%= stats.groupName %></h3>
+                        <p style="color: var(--clr-text-muted); font-size: 0.9rem; margin-top: 0.25rem;">
+                            Bantu kumpulkan penjualan bersama anggota komunitas Anda. Setiap <strong><%= stats.groupTargetSales %></strong> penjualan terkumpul, Vokasi.ai menyponsori 3 Beasiswa Kursus untuk siswa kurang mampu.
+                        </p>
+                    </div>
+                    <div style="text-align: right;">
+                        <span style="font-size: 1.75rem; font-weight: 800; color: #10b981;"><%= stats.groupSalesCount %></span>
+                        <span style="color: var(--clr-text-muted); font-size: 0.9rem;">/ <%= stats.groupTargetSales %> Terjual</span>
+                    </div>
+                </div>
+                <div class="progress-container">
+                    <% const pct = Math.min(100, Math.round((stats.groupSalesCount / stats.groupTargetSales) * 100)); %>
+                    <div class="progress-bar-custom" style="width: <%= pct %>%"></div>
+                </div>
+                <small style="color: var(--clr-text-muted); display: block; text-align: right; font-weight: 600;"><%= pct %>% Selesai</small>
+            </div>
+
+            <!-- Link Generator -->
+            <div class="glass-card" style="padding: 2rem; margin-bottom: 2rem;" id="link-generator">
+                <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--clr-text-main); margin-bottom: 1rem;">Tautan Referal Anda</h3>
+                <p style="color: var(--clr-text-muted); font-size: 0.9rem; margin-bottom: 1.5rem; line-height: 1.5;">
+                    Bagikan tautan promosi ini di media sosial, grup WhatsApp, atau blog Anda. Pengunjung yang masuk lewat tautan ini akan mendapatkan diskon ekstra, dan Anda mendapatkan komisi penjualan.
+                </p>
+                <div class="copy-link-wrapper">
+                    <input type="text" readonly id="referralLinkInput" class="copy-link-input" value="http://localhost:3000/kursus-online?ref=<%= affiliate.referralCode %>">
+                    <button onclick="copyReferralLink()" id="copyBtn" class="btn btn-secondary" style="padding: 0.65rem 1.25rem; font-size: 0.85rem; border-radius: var(--radius-sm); white-space: nowrap;">
+                        Salin Tautan
+                    </button>
+                </div>
+            </div>
+
+            <!-- Commission withdrawal -->
+            <div class="glass-card" style="padding: 2rem; margin-bottom: 2rem;" id="payout-section">
+                <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--clr-text-main); margin-bottom: 0.5rem;">Tarik Komisi Pendapatan</h3>
+                <p style="color: var(--clr-text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">
+                    Saldo dapat dicairkan langsung ke akun <strong><%= affiliate.paymentMethod %> (<%= affiliate.paymentAccount %>)</strong>. Proses verifikasi memakan waktu 1x24 jam kerja.
+                </p>
+
+                <% if (stats.availableBalance >= 100000) { %>
+                    <form id="payoutRequestForm" style="display: flex; gap: 1rem; align-items: flex-end; flex-wrap: wrap;">
+                        <input type="hidden" name="affiliateId" value="<%= affiliate.id %>">
+                        <div style="flex: 1; min-width: 200px;">
+                            <label style="display: block; font-weight: 600; font-size: 0.85rem; margin-bottom: 0.5rem; color: var(--clr-text-main);">Jumlah Penarikan (IDR) *</label>
+                            <input type="number" name="amount" min="100000" max="<%= stats.availableBalance %>" required class="form-input-custom" value="<%= stats.availableBalance %>" style="padding: 0.75rem 1rem;">
+                            <small style="color: var(--clr-text-muted); display: block; margin-top: 0.25rem;">Minimal penarikan Rp 100.000</small>
+                        </div>
+                        <button type="submit" id="submitPayoutBtn" class="btn btn-secondary" style="padding: 0.75rem 1.5rem; border-radius: var(--radius-sm); font-weight: 700; height: 48px;">
+                            Ajukan Pencairan Saldo
+                        </button>
+                    </form>
+                <% } else { %>
+                    <div style="background: #f1f5f9; padding: 1.25rem; border-radius: var(--radius-sm); color: var(--clr-text-muted); font-size: 0.95rem; border-left: 4px solid var(--clr-text-muted);">
+                        🔒 Saldo belum mencapai batas minimum pencairan Rp 100.000 (Saldo Anda saat ini: <strong>Rp <%= stats.availableBalance.toLocaleString('id-ID') %></strong>).
+                    </div>
+                <% } %>
+            </div>
+
+            <!-- Referrals Table -->
+            <div id="referral-list">
+                <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--clr-text-main); margin-bottom: 1rem;">Daftar Referal Pembelajar</h3>
+                <div class="responsive-table-container">
+                    <table class="custom-table">
+                        <thead>
+                            <tr>
+                                <th>Tanggal</th>
+                                <th>Nama Lead</th>
+                                <th>Nama Kursus</th>
+                                <th>Harga</th>
+                                <th>Komisi Anda</th>
+                                <th>Status Payout</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% if (referrals.length === 0) { %>
+                                <tr>
+                                    <td colspan="6" style="text-align: center; padding: 2rem;">Belum ada penjualan referal tercatat. Ayo bagikan tautan Anda!</td>
+                                </tr>
+                            <% } else { %>
+                                <% referrals.reverse().forEach(ref => { %>
+                                    <tr>
+                                        <td><%= new Date(ref.createdAt).toLocaleDateString('id-ID', {day: 'numeric', month: 'short', year: 'numeric'}) %></td>
+                                        <td><strong><%= ref.leadName %></strong></td>
+                                        <td><%= ref.courseTitle %></td>
+                                        <td>Rp <%= ref.amountPaid.toLocaleString('id-ID') %></td>
+                                        <td style="color: #10b981; font-weight: 700;">Rp <%= ref.commissionAmount.toLocaleString('id-ID') %></td>
+                                        <td>
+                                            <span class="status-badge status-<%= ref.status %>">
+                                                <%= ref.status === 'pending' ? 'escrow' : ref.status %>
+                                            </span>
+                                            <% if (ref.status === 'pending') { %>
+                                                <small style="display: block; font-size: 0.75rem; color: var(--clr-text-muted); margin-top: 0.25rem;">Rilis: <%= new Date(ref.unlockedAt).toLocaleDateString('id-ID', {day: 'numeric', month: 'short'}) %></small>
+                                            <% } %>
+                                        </td>
+                                    </tr>
+                                <% }) %>
+                            <% } %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Payout History Table -->
+            <div style="margin-top: 2rem;">
+                <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--clr-text-main); margin-bottom: 1rem;">Riwayat Penarikan Saldo</h3>
+                <div class="responsive-table-container">
+                    <table class="custom-table">
+                        <thead>
+                            <tr>
+                                <th>Tanggal Pengajuan</th>
+                                <th>Nominal</th>
+                                <th>Tujuan Pembayaran</th>
+                                <th>Status Proses</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% if (payouts.length === 0) { %>
+                                <tr>
+                                    <td colspan="4" style="text-align: center; padding: 2rem;">Belum ada riwayat penarikan dana.</td>
+                                </tr>
+                            <% } else { %>
+                                <% payouts.reverse().forEach(pay => { %>
+                                    <tr>
+                                        <td><%= new Date(pay.requestedAt).toLocaleDateString('id-ID', {day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute:'2-digit'}) %></td>
+                                        <td style="font-weight: 700; color: var(--clr-text-main);">Rp <%= pay.amount.toLocaleString('id-ID') %></td>
+                                        <td><%= pay.payoutDetails %></td>
+                                        <td>
+                                            <span class="status-badge status-<%= pay.status %>">
+                                                <%= pay.status %>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                <% }) %>
+                            <% } %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+
+<script>
+    // Click copy button
+    function copyReferralLink() {
+        const copyInput = document.getElementById('referralLinkInput');
+        copyInput.select();
+        copyInput.setSelectionRange(0, 99999); // Mobile
+        
+        navigator.clipboard.writeText(copyInput.value)
+            .then(() => {
+                const btn = document.getElementById('copyBtn');
+                const prevText = btn.textContent;
+                btn.textContent = 'Tersalin! ✓';
+                btn.style.background = '#10B981';
+                btn.style.borderColor = '#10B981';
+                
+                window.showToast && window.showToast('✅ Tautan referal berhasil disalin.');
+                
+                setTimeout(() => {
+                    btn.textContent = prevText;
+                    btn.style.background = '';
+                    btn.style.borderColor = '';
+                }, 2500);
+            })
+            .catch(() => {
+                window.showToast && window.showToast('❌ Gagal menyalin tautan.', true);
+            });
+    }
+
+    // AJax payout submit
+    const payoutForm = document.getElementById('payoutRequestForm');
+    const submitPayoutBtn = document.getElementById('submitPayoutBtn');
+    if (payoutForm) {
+        payoutForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            submitPayoutBtn.disabled = true;
+            submitPayoutBtn.textContent = 'Mengirimkan Pengajuan...';
+
+            try {
+                const formData = new FormData(payoutForm);
+                const data = Object.fromEntries(formData.entries());
+                const res = await fetch('/api/affiliate/payout-request', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                const result = await res.json();
+                
+                if (res.ok && result.success) {
+                    window.showToast && window.showToast('✅ Permintaan penarikan saldo berhasil dikirim.');
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 1500);
+                } else {
+                    window.showToast && window.showToast(`❌ ${result.error || 'Terjadi kesalahan.'}`, true);
+                    submitPayoutBtn.disabled = false;
+                    submitPayoutBtn.textContent = 'Ajukan Pencairan Saldo';
+                }
+            } catch (err) {
+                window.showToast && window.showToast('❌ Kesalahan koneksi.', true);
+                submitPayoutBtn.disabled = false;
+                submitPayoutBtn.textContent = 'Ajukan Pencairan Saldo';
+            }
+        });
+    }
+
+    // Scroll active link styling
+    window.addEventListener('DOMContentLoaded', () => {
+        const links = document.querySelectorAll('.sidebar-nav-link');
+        links.forEach(link => {
+            link.addEventListener('click', () => {
+                links.forEach(l => l.classList.remove('active'));
+                link.classList.add('active');
+            });
+        });
+    });
+</script>
+
+<%- include('../partials/footer') %>

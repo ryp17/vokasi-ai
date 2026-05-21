@@ -1,0 +1,29 @@
+[
+  {
+    "id": "pay_c7n27cx2k",
+    "affiliateId": "aff_ahmad",
+    "amount": 300000,
+    "status": "pending",
+    "payoutDetails": "Bank Transfer - BCA - 8830129482",
+    "requestedAt": "2026-05-21T13:44:41.228Z",
+    "processedAt": null
+  },
+  {
+    "id": "pay_b951e9485",
+    "affiliateId": "aff_siti",
+    "amount": 2000000,
+    "status": "approved",
+    "payoutDetails": "GoPay - 081234567890",
+    "requestedAt": "2026-05-13T13:44:41.213Z",
+    "processedAt": "2026-05-14T13:44:41.213Z"
+  },
+  {
+    "id": "pay_i8z1f710z",
+    "affiliateId": "aff_siti",
+    "amount": 1000000,
+    "status": "pending",
+    "payoutDetails": "GoPay - 081234567890",
+    "requestedAt": "2026-05-20T13:44:41.213Z",
+    "processedAt": null
+  }
+]

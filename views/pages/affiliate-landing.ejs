@@ -1,0 +1,277 @@
+<%- include('../partials/head') %>
+
+<!-- Link Affiliate specific styles -->
+<link rel="stylesheet" href="/css/affiliate.css">
+
+<!-- Hero Section -->
+<section class="affiliate-hero">
+    <div class="container" style="max-width: 800px; margin: 0 auto; padding: 0 1.5rem;">
+        <span style="background: rgba(59, 130, 246, 0.15); color: #60a5fa; padding: 0.5rem 1rem; border-radius: 99px; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; display: inline-block; margin-bottom: 1.5rem;">Vokasi Growth Engine</span>
+        <h1 style="font-size: clamp(2.5rem, 5vw, 3.5rem); font-weight: 800; line-height: 1.1; margin-bottom: 1.5rem; letter-spacing: -0.02em;">
+            Membangun Masa Depan Vokasi Bersama <span class="gradient-text-blue">Ambassador Vokasi</span>
+        </h1>
+        <p style="font-size: 1.15rem; color: #94a3b8; max-width: 600px; margin: 0 auto 2.5rem; line-height: 1.6;">
+            Program kemitraan yang didesain khusus untuk para pendidik, mahasiswa, alumni, dan pemimpin komunitas di Indonesia. Dapatkan komisi berkelanjutan sambil berkontribusi bagi pendidikan vokasi.
+        </p>
+        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+            <a href="#register" class="btn btn-secondary" style="padding: 0.85rem 2rem; font-size: 1rem; border-radius: var(--radius-sm);">Daftar Sekarang</a>
+            <button onclick="openLoginModal()" class="btn btn-outline" style="padding: 0.85rem 2rem; font-size: 1rem; border-radius: var(--radius-sm); border-color: rgba(255,255,255,0.2); color: white;">Masuk ke Dashboard</button>
+        </div>
+    </div>
+</section>
+
+<!-- Value Proposition Section -->
+<section style="padding: 5rem 0; background: var(--clr-bg);">
+    <div class="container">
+        <div style="text-align: center; max-width: 600px; margin: 0 auto 3rem;">
+            <h2 style="font-size: 2.25rem; font-weight: 800; color: var(--clr-text-main); margin-bottom: 1rem;">Mengapa Menjadi Mitra Vokasi?</h2>
+            <p style="color: var(--clr-text-muted); line-height: 1.6;">Kemitraan kami dibangun berdasarkan prinsip kerja sama saling menguntungkan (Gotong Royong), berfokus pada kelulusan siswa dan kontribusi sosial nyata.</p>
+        </div>
+
+        <div class="feature-grid-3">
+            <!-- Card 1 -->
+            <div class="glass-card">
+                <div class="icon-box-lg">💸</div>
+                <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--clr-text-main); margin-bottom: 0.75rem;">Komisi Hingga 30%</h3>
+                <p style="color: var(--clr-text-muted); line-height: 1.6; font-size: 0.95rem;">
+                    Dapatkan komisi dasar 20% untuk setiap penjualan kursus, yang meningkat hingga 30% seiring pencapaian target penjualan Anda.
+                </p>
+            </div>
+            <!-- Card 2 -->
+            <div class="glass-card">
+                <div class="icon-box-lg">🤝</div>
+                <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--clr-text-main); margin-bottom: 0.75rem;">Dukungan Gotong Royong</h3>
+                <p style="color: var(--clr-text-muted); line-height: 1.6; font-size: 0.95rem;">
+                    Setiap penjualan berkontribusi ke "Gotong Royong Pool" komunitas Anda untuk mendanai beasiswa siswa tidak mampu atau peralatan sekolah (SMK).
+                </p>
+            </div>
+            <!-- Card 3 -->
+            <div class="glass-card">
+                <div class="icon-box-lg">📚</div>
+                <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--clr-text-main); margin-bottom: 0.75rem;">Pendampingan Karir</h3>
+                <p style="color: var(--clr-text-muted); line-height: 1.6; font-size: 0.95rem;">
+                    Dapatkan bonus ketika murid yang Anda referensikan berhasil menyelesaikan kursus dan lulus ujian sertifikasi kompetensi industri.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Program Tiers Section -->
+<section style="padding: 5rem 0; background: var(--clr-white);">
+    <div class="container" style="max-width: 900px;">
+        <div style="text-align: center; margin-bottom: 3rem;">
+            <h2 style="font-size: 2.25rem; font-weight: 800; color: var(--clr-text-main); margin-bottom: 1rem;">Tingkatan Mitra & Keuntungan</h2>
+            <p style="color: var(--clr-text-muted); line-height: 1.6;">Semakin banyak pembelajar yang Anda bantu, semakin tinggi status kemitraan dan reward yang diperoleh.</p>
+        </div>
+
+        <div class="responsive-table-container">
+            <table class="custom-table">
+                <thead>
+                    <tr>
+                        <th>Tingkatan</th>
+                        <th>Penjualan</th>
+                        <th>Komisi</th>
+                        <th>Keuntungan Eksklusif</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="tier-badge tier-rintisan">Rintisan</span></td>
+                        <td>0 - 5 Kursus</td>
+                        <td><strong>20%</strong></td>
+                        <td>Akses awal materi pemasaran & dashboard real-time.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="tier-badge tier-terampil">Terampil</span></td>
+                        <td>6 - 20 Kursus</td>
+                        <td><strong>22%</strong></td>
+                        <td>Official Vokasi Bomber Jacket, Prioritas Dukungan Komunitas.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="tier-badge tier-ahli">Ahli</span></td>
+                        <td>21 - 50 Kursus</td>
+                        <td><strong>25%</strong></td>
+                        <td>Branded Tech Pack & Badge Sertifikasi "Vokasi Career Advisor".</td>
+                    </tr>
+                    <tr>
+                        <td><span class="tier-badge tier-maestro">Maestro</span></td>
+                        <td>51+ Kursus</td>
+                        <td><strong>30%</strong></td>
+                        <td>Token Sponsor Beasiswa 100% untuk siswa di komunitas Anda.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+<!-- Onboarding Registration Section -->
+<section id="register" style="padding: 6rem 0; background: var(--clr-bg); border-top: 1px solid var(--clr-border);">
+    <div class="container">
+        <div class="glass-card signup-card">
+            <div style="text-align: center; margin-bottom: 2.5rem;">
+                <h2 style="font-size: 1.75rem; font-weight: 800; color: var(--clr-text-main); margin-bottom: 0.5rem;">Formulir Pendaftaran Mitra</h2>
+                <p style="color: var(--clr-text-muted); font-size: 0.95rem;">Gabung sekarang secara gratis. Akun akan ditinjau dalam waktu 1x24 jam.</p>
+            </div>
+
+            <form id="affiliateRegisterForm">
+                <div class="form-group-custom">
+                    <label for="name">Nama Lengkap *</label>
+                    <input type="text" id="name" name="name" required class="form-input-custom" placeholder="Budi Santoso">
+                </div>
+
+                <div class="form-group-custom">
+                    <label for="email">Alamat Email Aktif *</label>
+                    <input type="email" id="email" name="email" required class="form-input-custom" placeholder="budi@example.com">
+                </div>
+
+                <div class="form-group-custom">
+                    <label for="referralCode">Kode Referal Kustom * (Untuk Tautan Anda)</label>
+                    <input type="text" id="referralCode" name="referralCode" required class="form-input-custom" placeholder="BUDIVOKASI" style="text-transform: uppercase;">
+                    <small style="color: var(--clr-text-muted); display: block; margin-top: 0.25rem;">Tautan Anda akan berupa: vokasi.ai/kursus-online?ref=KODE_ANDA</small>
+                </div>
+
+                <div class="form-group-custom" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <div>
+                        <label for="paymentMethod">Metode Pembayaran Payout</label>
+                        <select id="paymentMethod" name="paymentMethod" class="form-input-custom">
+                            <option value="GoPay">GoPay</option>
+                            <option value="OVO">OVO</option>
+                            <option value="DANA">DANA</option>
+                            <option value="Bank Transfer">Bank Transfer (BCA/Mandiri)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="paymentAccount">No. Akun / No. Rekening</label>
+                        <input type="text" id="paymentAccount" name="paymentAccount" required class="form-input-custom" placeholder="0812xxxxxxxx">
+                    </div>
+                </div>
+
+                <div class="form-group-custom">
+                    <label for="gotongRoyongGroup">Komunitas / Sekolah (Gotong Royong Group)</label>
+                    <input type="text" id="gotongRoyongGroup" name="gotongRoyongGroup" class="form-input-custom" placeholder="Contoh: SMKN 1 Jakarta / Alumni ITS / Umum">
+                    <small style="color: var(--clr-text-muted); display: block; margin-top: 0.25rem;">Digunakan untuk mengumpulkan target bonus beasiswa kolektif.</small>
+                </div>
+
+                <button type="submit" id="submitRegBtn" class="btn btn-secondary btn-full" style="padding: 1rem; border-radius: var(--radius-sm); margin-top: 1rem; font-weight: 700; width: 100%;">
+                    KIRIM PENGAJUAN MITRA
+                </button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<!-- Login Modal -->
+<div id="loginModal" class="modal-overlay">
+    <div class="modal-content">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+            <h3 style="font-size: 1.25rem; font-weight: 800; color: var(--clr-text-main);">Masuk Dashboard</h3>
+            <button onclick="closeLoginModal()" style="background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--clr-text-muted);">&times;</button>
+        </div>
+        <form id="affiliateLoginForm">
+            <div class="form-group-custom">
+                <label for="loginKey">Email atau Kode Referal Anda</label>
+                <input type="text" id="loginKey" name="loginKey" required class="form-input-custom" placeholder="budi@example.com / BUDIVOKASI">
+            </div>
+            <button type="submit" id="submitLoginBtn" class="btn btn-secondary btn-full" style="padding: 0.85rem; border-radius: var(--radius-sm); font-weight: 700; width: 100%;">
+                MASUK DASHBOARD
+            </button>
+        </form>
+    </div>
+</div>
+
+<!-- Scripts for interactive actions -->
+<script>
+    function openLoginModal() {
+        document.getElementById('loginModal').classList.add('active');
+    }
+
+    function closeLoginModal() {
+        document.getElementById('loginModal').classList.remove('active');
+    }
+
+    // Auto trigger login modal if redirect has login=true query param
+    window.addEventListener('DOMContentLoaded', () => {
+        const params = new URLSearchParams(window.location.search);
+        if (params.get('login') === 'true') {
+            openLoginModal();
+        }
+        if (params.get('error') === 'notfound') {
+            window.showToast && window.showToast('❌ Akun tidak ditemukan. Harap periksa email/kode Anda.', true);
+        }
+    });
+
+    // Handle AJAX Register Form
+    const registerForm = document.getElementById('affiliateRegisterForm');
+    const submitRegBtn = document.getElementById('submitRegBtn');
+    if (registerForm) {
+        registerForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            submitRegBtn.disabled = true;
+            submitRegBtn.textContent = 'Memproses Pengajuan...';
+
+            try {
+                const formData = new FormData(registerForm);
+                const data = Object.fromEntries(formData.entries());
+                const res = await fetch('/api/affiliate/register', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                const result = await res.json();
+                
+                if (res.ok && result.success) {
+                    window.showToast && window.showToast('✅ Pendaftaran Berhasil! Peninjauan sedang berlangsung.');
+                    registerForm.reset();
+                    // Scroll to top or trigger login modal
+                    setTimeout(() => {
+                        window.location.href = '/affiliate?login=true';
+                    }, 2000);
+                } else {
+                    window.showToast && window.showToast(`❌ ${result.error || 'Terjadi kesalahan.'}`, true);
+                }
+            } catch (err) {
+                window.showToast && window.showToast('❌ Gagal menghubungi server.', true);
+            } finally {
+                submitRegBtn.disabled = false;
+                submitRegBtn.textContent = 'KIRIM PENGAJUAN MITRA';
+            }
+        });
+    }
+
+    // Handle AJAX Login Form
+    const loginForm = document.getElementById('affiliateLoginForm');
+    const submitLoginBtn = document.getElementById('submitLoginBtn');
+    if (loginForm) {
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            submitLoginBtn.disabled = true;
+            submitLoginBtn.textContent = 'Mengecek Akun...';
+
+            try {
+                const formData = new FormData(loginForm);
+                const data = Object.fromEntries(formData.entries());
+                const res = await fetch('/api/affiliate/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                const result = await res.json();
+                
+                if (res.ok && result.success) {
+                    window.location.href = `/affiliate/dashboard?code=${result.referralCode}`;
+                } else {
+                    window.showToast && window.showToast(`❌ ${result.error || 'Akun tidak ditemukan.'}`, true);
+                }
+            } catch (err) {
+                window.showToast && window.showToast('❌ Gagal login.', true);
+            } finally {
+                submitLoginBtn.disabled = false;
+                submitLoginBtn.textContent = 'MASUK DASHBOARD';
+            }
+        });
+    }
+</script>
+
+<%- include('../partials/footer') %>

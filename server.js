@@ -1,5 +1,36 @@
 const express = require('express');
 const path = require('path');
+const Database = require('./db/database');
+
+// Helpers for Affiliate Program
+function getCookie(req, name) {
+    const list = {};
+    const rc = req.headers.cookie;
+    if (rc) {
+        rc.split(';').forEach(cookie => {
+            const parts = cookie.split('=');
+            if (parts.length >= 2) {
+                list[parts.shift().trim()] = decodeURI(parts.join('='));
+            }
+        });
+    }
+    return list[name];
+}
+
+function findCourseBySubjectOrSlug(input) {
+    if (!input) return null;
+    const lowerInput = input.toLowerCase();
+    for (const [slug, course] of Object.entries(courseData)) {
+        if (lowerInput.includes(slug) || lowerInput.includes(course.title.toLowerCase())) {
+            return { slug, ...course };
+        }
+    }
+    return {
+        slug: 'online-marketing-fundamental',
+        title: 'Online Marketing Fundamental',
+        price: 'Rp 499.000'
+    };
+}
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -148,7 +179,240 @@ app.post('/api/apply', (req, res) => {
     const newLead = { ...req.body, timestamp: new Date().toISOString() };
     leads.push(newLead);
     fs.writeFileSync(dbPath, JSON.stringify(leads, null, 2));
+
+    // --- Affiliate Tracking Attribution ---
+    try {
+        const refCode = getCookie(req, 'vokasi_ref') || req.body.refCode;
+        if (refCode) {
+            const affiliate = Database.getAffiliateByCode(refCode);
+            if (affiliate && affiliate.status === 'approved') {
+                const subjectOrProgram = req.body.subject || req.body.selectedProgram || '';
+                const courseInfo = findCourseBySubjectOrSlug(subjectOrProgram);
+                if (courseInfo) {
+                    const priceNumber = parseInt(courseInfo.price.replace(/[^0-9]/g, ''), 10) || 499000;
+                    const stats = Database.getAffiliateStats(affiliate.id);
+                    const commissionAmount = Math.round(priceNumber * stats.currentCommissionRate);
+
+                    Database.createReferral({
+                        affiliateId: affiliate.id,
+                        visitorIp: req.ip || req.headers['x-forwarded-for'] || '',
+                        leadEmail: req.body.email || req.body.emailAddress || '',
+                        leadName: req.body.name || req.body.fullName || '',
+                        courseSlug: courseInfo.slug,
+                        courseTitle: courseInfo.title,
+                        amountPaid: priceNumber,
+                        commissionAmount: commissionAmount
+                    });
+                }
+            }
+        }
+    } catch (err) {
+        console.error('Error attributing affiliate lead:', err);
+    }
+    // --------------------------------------
+
     res.json({ success: true, message: 'Application received successfully.' });
+});
+
+// GET /affiliate - Landing page
+app.get('/affiliate', (req, res) => {
+    res.render('pages/affiliate-landing', { 
+        pageTitle: 'Program Afiliasi Vokasi | Vokasi.ai',
+        error: null,
+        success: null 
+    });
+});
+
+// POST /api/affiliate/register - Register a new affiliate
+app.post('/api/affiliate/register', (req, res) => {
+    try {
+        const { name, email, referralCode, paymentMethod, paymentAccount, gotongRoyongGroup } = req.body;
+        if (!name || !email || !referralCode) {
+            return res.status(400).json({ success: false, error: 'Harap isi semua kolom wajib (Nama, Email, Kode Referal).' });
+        }
+        
+        const newAff = Database.createAffiliate({
+            name,
+            email,
+            referralCode,
+            paymentMethod,
+            paymentAccount,
+            gotongRoyongGroup
+        });
+        
+        res.json({ success: true, message: 'Pendaftaran berhasil! Akun Anda sedang ditinjau oleh tim Vokasi.', affiliate: newAff });
+    } catch (err) {
+        res.status(400).json({ success: false, error: err.message });
+    }
+});
+
+// POST /api/affiliate/click - Record affiliate link click
+app.post('/api/affiliate/click', (req, res) => {
+    const { code } = req.body;
+    if (code) {
+        Database.incrementClicks(code);
+        return res.json({ success: true });
+    }
+    res.status(400).json({ success: false, error: 'Missing code' });
+});
+
+// POST /api/affiliate/login - Simple email/code login for dashboard
+app.post('/api/affiliate/login', (req, res) => {
+    const { loginKey } = req.body;
+    if (!loginKey) {
+        return res.status(400).json({ success: false, error: 'Harap masukkan email atau kode referal.' });
+    }
+    
+    let affiliate = Database.getAffiliateByEmail(loginKey);
+    if (!affiliate) {
+        affiliate = Database.getAffiliateByCode(loginKey);
+    }
+    
+    if (!affiliate) {
+        return res.status(404).json({ success: false, error: 'Akun tidak ditemukan. Harap daftar terlebih dahulu.' });
+    }
+    
+    // Set cookie for quick login session (valid for 1 day)
+    res.cookie('vokasi_dashboard_code', affiliate.referralCode, { maxAge: 24 * 60 * 60 * 1000, httpOnly: false });
+    res.json({ success: true, referralCode: affiliate.referralCode });
+});
+
+// GET /affiliate/dashboard - Personal dashboard
+app.get('/affiliate/dashboard', (req, res) => {
+    const codeQuery = req.query.code;
+    const cookieCode = getCookie(req, 'vokasi_dashboard_code');
+    const code = codeQuery || cookieCode;
+    
+    if (!code) {
+        return res.redirect('/affiliate?login=true');
+    }
+    
+    const affiliate = Database.getAffiliateByCode(code);
+    if (!affiliate) {
+        res.clearCookie('vokasi_dashboard_code');
+        return res.redirect('/affiliate?error=notfound');
+    }
+    
+    const stats = Database.getAffiliateStats(affiliate.id);
+    const referrals = Database.getReferralsByAffiliate(affiliate.id);
+    const payouts = Database.getPayoutsByAffiliate(affiliate.id);
+    
+    res.render('pages/affiliator-dashboard', {
+        pageTitle: `Dashboard Afiliasi - ${affiliate.name} | Vokasi.ai`,
+        affiliate,
+        stats,
+        referrals,
+        payouts
+    });
+});
+
+// POST /api/affiliate/payout-request - Request payout
+app.post('/api/affiliate/payout-request', (req, res) => {
+    const { affiliateId, amount } = req.body;
+    if (!affiliateId || !amount) {
+        return res.status(400).json({ success: false, error: 'Parameter tidak lengkap.' });
+    }
+    
+    const affiliate = Database.getAffiliateById(affiliateId);
+    if (!affiliate) {
+        return res.status(404).json({ success: false, error: 'Affiliate not found.' });
+    }
+    
+    const stats = Database.getAffiliateStats(affiliateId);
+    const requestAmount = parseInt(amount, 10);
+    
+    if (requestAmount <= 0) {
+        return res.status(400).json({ success: false, error: 'Jumlah penarikan tidak valid.' });
+    }
+    if (requestAmount > stats.availableBalance) {
+        return res.status(400).json({ success: false, error: 'Saldo tidak mencukupi.' });
+    }
+    
+    Database.createPayout({
+        affiliateId,
+        amount: requestAmount,
+        payoutDetails: `${affiliate.paymentMethod} - ${affiliate.paymentAccount}`
+    });
+    
+    res.json({ success: true, message: 'Permintaan penarikan saldo berhasil dikirim.' });
+});
+
+// GET /admin/affiliate - Admin Dashboard
+app.get('/admin/affiliate', (req, res) => {
+    const affiliates = Database.getAffiliates();
+    const referrals = Database.getReferrals();
+    const payouts = Database.getPayouts();
+    
+    // Compute general analytics
+    const totalClicks = affiliates.reduce((sum, a) => sum + (a.clicks || 0), 0);
+    const totalConversions = referrals.length;
+    const totalCommissionEscrow = referrals
+        .filter(r => r.status === 'pending')
+        .reduce((sum, r) => sum + r.commissionAmount, 0);
+    const totalPayoutsPending = payouts
+        .filter(p => p.status === 'pending')
+        .reduce((sum, p) => sum + p.amount, 0);
+    const totalPayoutsApproved = payouts
+        .filter(p => p.status === 'approved')
+        .reduce((sum, p) => sum + p.amount, 0);
+        
+    res.render('pages/admin-dashboard', {
+        pageTitle: 'Admin Affiliate Control | Vokasi.ai',
+        affiliates,
+        referrals,
+        payouts,
+        stats: {
+            totalClicks,
+            totalConversions,
+            totalCommissionEscrow,
+            totalPayoutsPending,
+            totalPayoutsApproved
+        }
+    });
+});
+
+// POST /api/admin/affiliate/approve - Approve / Suspend Affiliate
+app.post('/api/admin/affiliate/approve', (req, res) => {
+    const { id, status } = req.body;
+    if (!id || !status) {
+        return res.status(400).json({ success: false, error: 'Missing parameters.' });
+    }
+    
+    const updated = Database.updateAffiliateStatus(id, status);
+    if (!updated) {
+        return res.status(404).json({ success: false, error: 'Affiliate not found.' });
+    }
+    
+    res.json({ success: true });
+});
+
+// POST /api/admin/payout/action - Approve / Reject Payout
+app.post('/api/admin/payout/action', (req, res) => {
+    const { id, status } = req.body;
+    if (!id || !status) {
+        return res.status(400).json({ success: false, error: 'Missing parameters.' });
+    }
+    
+    const updated = Database.updatePayoutStatus(id, status);
+    if (!updated) {
+        return res.status(404).json({ success: false, error: 'Payout request not found.' });
+    }
+    
+    res.json({ success: true });
+});
+
+// POST /api/admin/referral/status - Change referral status (fraud check)
+app.post('/api/admin/referral/status', (req, res) => {
+    const { id, status } = req.body;
+    if (!id || !status) {
+        return res.status(400).json({ success: false, error: 'Missing parameters.' });
+    }
+    
+    const updated = Database.updateReferralStatus(id, status);
+    if (!updated) {
+        return res.status(404).json({ success: false, error: 'Referral not found.' });
+    }
+    res.json({ success: true });
 });
 
 // Start server
