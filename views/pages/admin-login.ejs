@@ -1,0 +1,27 @@
+<%- include('../partials/head') %>
+
+<section style="padding: 10rem 0; background: var(--clr-bg); min-height: 80vh; display: flex; align-items: center;">
+    <div class="container" style="max-width: 400px;">
+        <div class="glass-card" style="text-align: center;">
+            <h2 style="font-size: 1.5rem; font-weight: 800; color: var(--clr-text-main); margin-bottom: 1.5rem;">Admin Secure Access</h2>
+            
+            <% if (typeof error !== 'undefined' && error) { %>
+                <div style="background: rgba(239, 68, 68, 0.1); color: #ef4444; padding: 0.75rem; border-radius: var(--radius-sm); margin-bottom: 1rem; font-size: 0.9rem;">
+                    <%= error %>
+                </div>
+            <% } %>
+
+            <form action="/api/admin/login" method="POST">
+                <div class="form-group-custom" style="text-align: left;">
+                    <label for="password">Administrator Password</label>
+                    <input type="password" id="password" name="password" required class="form-input-custom" placeholder="••••••••">
+                </div>
+                <button type="submit" class="btn btn-secondary btn-full" style="padding: 0.85rem; border-radius: var(--radius-sm); font-weight: 700; width: 100%; margin-top: 1rem;">
+                    LOGIN TO CONTROL PANEL
+                </button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<%- include('../partials/footer') %>

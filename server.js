@@ -35,6 +35,19 @@ function findCourseBySubjectOrSlug(input) {
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'vokasi2026';
+
+function requireAdmin(req, res, next) {
+    const adminToken = getCookie(req, 'vokasi_admin_token');
+    if (adminToken === ADMIN_PASSWORD) {
+        return next();
+    }
+    if (req.path.startsWith('/api/')) {
+        return res.status(401).json({ success: false, error: 'Unauthorized' });
+    }
+    res.redirect('/admin/login');
+}
+
 // Middleware
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
@@ -288,8 +301,8 @@ app.post('/api/affiliate/login', (req, res) => {
         return res.status(404).json({ success: false, error: 'Akun tidak ditemukan. Harap daftar terlebih dahulu.' });
     }
     
-    // Set cookie for quick login session (valid for 1 day)
-    res.cookie('vokasi_dashboard_code', affiliate.referralCode, { maxAge: 24 * 60 * 60 * 1000, httpOnly: false });
+    // Set cookie for quick login session (valid for 1 day), secured against XSS and CSRF
+    res.cookie('vokasi_dashboard_code', affiliate.referralCode, { maxAge: 24 * 60 * 60 * 1000, httpOnly: true, sameSite: 'Strict' });
     res.json({ success: true, referralCode: affiliate.referralCode });
 });
 
@@ -324,6 +337,14 @@ app.get('/affiliate/dashboard', (req, res) => {
 // POST /api/affiliate/payout-request - Request payout
 app.post('/api/affiliate/payout-request', (req, res) => {
     const { affiliateId, amount } = req.body;
+    
+    // Security: Verify request is from the authenticated affiliate
+    const cookieCode = getCookie(req, 'vokasi_dashboard_code');
+    const requestingAffiliate = Database.getAffiliateByCode(cookieCode);
+    if (!requestingAffiliate || requestingAffiliate.id !== affiliateId) {
+        return res.status(403).json({ success: false, error: 'Unauthorized payout request.' });
+    }
+
     if (!affiliateId || !amount) {
         return res.status(400).json({ success: false, error: 'Parameter tidak lengkap.' });
     }
@@ -352,8 +373,23 @@ app.post('/api/affiliate/payout-request', (req, res) => {
     res.json({ success: true, message: 'Permintaan penarikan saldo berhasil dikirim.' });
 });
 
+// GET /admin/login - Admin Login Page
+app.get('/admin/login', (req, res) => {
+    res.render('pages/admin-login', { pageTitle: 'Admin Login | Vokasi.ai', error: req.query.error ? 'Password salah.' : null });
+});
+
+// POST /api/admin/login
+app.post('/api/admin/login', (req, res) => {
+    const { password } = req.body;
+    if (password === ADMIN_PASSWORD) {
+        res.cookie('vokasi_admin_token', password, { maxAge: 24 * 60 * 60 * 1000, httpOnly: true, sameSite: 'Strict' });
+        return res.redirect('/admin/affiliate');
+    }
+    res.redirect('/admin/login?error=1');
+});
+
 // GET /admin/affiliate - Admin Dashboard
-app.get('/admin/affiliate', (req, res) => {
+app.get('/admin/affiliate', requireAdmin, (req, res) => {
     const affiliates = Database.getAffiliates();
     const referrals = Database.getReferrals();
     const payouts = Database.getPayouts();
@@ -387,7 +423,7 @@ app.get('/admin/affiliate', (req, res) => {
 });
 
 // POST /api/admin/affiliate/approve - Approve / Suspend Affiliate
-app.post('/api/admin/affiliate/approve', (req, res) => {
+app.post('/api/admin/affiliate/approve', requireAdmin, (req, res) => {
     const { id, status } = req.body;
     if (!id || !status) {
         return res.status(400).json({ success: false, error: 'Missing parameters.' });
@@ -402,7 +438,7 @@ app.post('/api/admin/affiliate/approve', (req, res) => {
 });
 
 // POST /api/admin/payout/action - Approve / Reject Payout
-app.post('/api/admin/payout/action', (req, res) => {
+app.post('/api/admin/payout/action', requireAdmin, (req, res) => {
     const { id, status } = req.body;
     if (!id || !status) {
         return res.status(400).json({ success: false, error: 'Missing parameters.' });
@@ -417,7 +453,7 @@ app.post('/api/admin/payout/action', (req, res) => {
 });
 
 // POST /api/admin/referral/status - Change referral status (fraud check)
-app.post('/api/admin/referral/status', (req, res) => {
+app.post('/api/admin/referral/status', requireAdmin, (req, res) => {
     const { id, status } = req.body;
     if (!id || !status) {
         return res.status(400).json({ success: false, error: 'Missing parameters.' });
