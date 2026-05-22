@@ -260,7 +260,7 @@
                 const result = await res.json();
                 
                 if (res.ok && result.success) {
-                    window.location.href = `/affiliate/dashboard?code=${result.referralCode}`;
+                    window.location.href = `/affiliate/dashboard`;
                 } else {
                     window.showToast && window.showToast(`❌ ${result.error || 'Akun tidak ditemukan.'}`, true);
                 }

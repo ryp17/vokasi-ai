@@ -295,9 +295,8 @@ app.post('/api/affiliate/login', (req, res) => {
 
 // GET /affiliate/dashboard - Personal dashboard
 app.get('/affiliate/dashboard', (req, res) => {
-    const codeQuery = req.query.code;
     const cookieCode = getCookie(req, 'vokasi_dashboard_code');
-    const code = codeQuery || cookieCode;
+    const code = cookieCode;
     
     if (!code) {
         return res.redirect('/affiliate?login=true');
