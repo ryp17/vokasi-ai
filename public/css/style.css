@@ -1056,3 +1056,52 @@ select.form-control {
     border-color: var(--clr-border);
 }
 
+/* ==========================================================================
+   Jalur Karir Redesign Premium Layouts (Blueprint Grid & Neon Badges)
+   ========================================================================== */
+
+.bg-green-grid {
+    background-color: #08120e;
+    background-image: 
+        linear-gradient(to right, rgba(16, 185, 129, 0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(16, 185, 129, 0.04) 1px, transparent 1px);
+    background-size: 24px 24px;
+    color: #FFFFFF !important;
+}
+
+.btn-neon-green {
+    background: #2ee59d;
+    color: #052c1e !important;
+    box-shadow: 0 8px 15px rgba(46, 229, 157, 0.25);
+    border: none;
+    transition: all 0.3s ease;
+}
+.btn-neon-green:hover {
+    background: #23c483;
+    transform: translateY(-2px);
+    box-shadow: 0 15px 20px rgba(46, 229, 157, 0.35);
+    color: #052c1e !important;
+}
+
+.active-tier-card {
+    border: 2px solid #2ee59d !important;
+    background: rgba(46, 229, 157, 0.08) !important;
+    box-shadow: 0 0 20px rgba(46, 229, 157, 0.15) !important;
+}
+
+.glass-card-dark {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.glass-card-dark:hover {
+    transform: translateY(-5px);
+    border-color: rgba(46, 229, 157, 0.3);
+    box-shadow: 0 12px 30px rgba(46, 229, 157, 0.1);
+}
+
+

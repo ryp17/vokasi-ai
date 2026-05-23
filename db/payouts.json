@@ -21,9 +21,9 @@
     "id": "pay_n9wydr7hi",
     "affiliateId": "aff_siti",
     "amount": 1000000,
-    "status": "pending",
+    "status": "approved",
     "payoutDetails": "GoPay - 081234567890",
     "requestedAt": "2026-05-20T15:03:44.905Z",
-    "processedAt": null
+    "processedAt": "2026-05-22T02:41:16.592Z"
   }
 ]
