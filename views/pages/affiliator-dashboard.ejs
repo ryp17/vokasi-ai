@@ -37,31 +37,31 @@
             <!-- Stat Cards Row -->
             <div class="stat-grid-4" id="overview">
                 <!-- Card 1 -->
-                <div class="stat-card">
+                <div class="stat-card float-hover">
                     <div>
                         <span style="font-size: 0.85rem; color: var(--clr-text-muted); font-weight: 600; text-transform: uppercase;">Total Klik Tautan</span>
                         <div class="stat-val"><%= stats.clicks %></div>
                     </div>
                 </div>
                 <!-- Card 2 -->
-                <div class="stat-card">
+                <div class="stat-card float-hover">
                     <div>
                         <span style="font-size: 0.85rem; color: var(--clr-text-muted); font-weight: 600; text-transform: uppercase;">Total Konversi</span>
                         <div class="stat-val"><%= stats.totalSalesCount %></div>
                     </div>
                 </div>
                 <!-- Card 3 -->
-                <div class="stat-card">
+                <div class="stat-card float-hover">
                     <div>
                         <span style="font-size: 0.85rem; color: var(--clr-text-muted); font-weight: 600; text-transform: uppercase;">Total Komisi</span>
                         <div class="stat-val" style="color: #10b981;">Rp <%= stats.totalEarned.toLocaleString('id-ID') %></div>
                     </div>
                 </div>
                 <!-- Card 4 -->
-                <div class="stat-card" style="border-color: #3b82f6; background: #eff6ff;">
+                <div class="stat-card float-hover" style="border-color: #3b82f6; background: rgba(59, 130, 246, 0.05); box-shadow: 0 4px 20px rgba(59, 130, 246, 0.05);">
                     <div>
-                        <span style="font-size: 0.85rem; color: #1e3a8a; font-weight: 700; text-transform: uppercase;">Saldo Tersedia</span>
-                        <div class="stat-val" style="color: #2563eb;">Rp <%= stats.availableBalance.toLocaleString('id-ID') %></div>
+                        <span style="font-size: 0.85rem; color: #1e3a8a; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;">Saldo Tersedia</span>
+                        <div class="stat-val" style="color: #2563eb; text-shadow: 0 2px 10px rgba(37, 99, 235, 0.1);">Rp <%= stats.availableBalance.toLocaleString('id-ID') %></div>
                     </div>
                 </div>
             </div>
@@ -81,11 +81,14 @@
                         <span style="color: var(--clr-text-muted); font-size: 0.9rem;">/ <%= stats.groupTargetSales %> Terjual</span>
                     </div>
                 </div>
-                <div class="progress-container">
+                <div class="progress-container" style="height: 18px; background: rgba(0, 0, 0, 0.05); border-radius: 99px; margin-top: 1.5rem; overflow: hidden; box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);">
                     <% const pct = Math.min(100, Math.round((stats.groupSalesCount / stats.groupTargetSales) * 100)); %>
-                    <div class="progress-bar-custom" style="width: <%= pct %>%"></div>
+                    <div class="progress-bar-custom" style="width: <%= pct %>%; height: 100%; border-radius: 99px; background: linear-gradient(90deg, var(--clr-secondary) 0%, #10b981 100%); transition: width 1.5s cubic-bezier(0.34, 1.56, 0.64, 1); box-shadow: 0 0 12px rgba(16, 185, 129, 0.4); position: relative;">
+                        <!-- Shimmering overlay on the progress bar -->
+                        <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.15) 50%, rgba(255,255,255,0) 100%); animation: shimmer 2s infinite;"></div>
+                    </div>
                 </div>
-                <small style="color: var(--clr-text-muted); display: block; text-align: right; font-weight: 600;"><%= pct %>% Selesai</small>
+                <small style="color: var(--clr-text-muted); display: block; text-align: right; font-weight: 700; margin-top: 0.5rem;"><%= pct %>% Selesai</small>
             </div>
 
             <!-- Link Generator -->

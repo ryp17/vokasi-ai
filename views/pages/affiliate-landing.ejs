@@ -106,6 +106,43 @@
     </div>
 </section>
 
+<!-- Gotong Royong Impact Calculator Section -->
+<section style="padding: 5rem 0; background: var(--clr-bg-alt); border-top: 1px solid var(--clr-border);">
+    <div class="container" style="max-width: 800px; margin: 0 auto; padding: 0 1.5rem;">
+        <div class="glass-card" style="padding: 3rem; border-radius: var(--radius-lg); text-align: center; background: rgba(255, 255, 255, 0.85); border: 1px solid rgba(226, 232, 240, 0.8);">
+            <span style="background: rgba(16, 185, 129, 0.1); color: #059669; padding: 6px 14px; border-radius: 20px; font-size: 0.8rem; font-weight: 800; letter-spacing: 0.5px; display: inline-block; margin-bottom: 1rem; text-transform: uppercase;">Kalkulator Gotong Royong</span>
+            <h2 style="font-size: 2rem; font-weight: 800; color: var(--clr-text-main); margin-bottom: 1rem;">Kalkulator Dampak & Komisi</h2>
+            <p style="color: var(--clr-text-muted); line-height: 1.6; margin-bottom: 2.5rem; font-size: 1rem;">
+                Geser slider untuk melihat potensi komisi bulanan Anda dan kontribusi Gotong Royong untuk dana beasiswa siswa tidak mampu.
+            </p>
+
+            <div style="margin-bottom: 2.5rem;">
+                <label for="salesRange" style="display: block; font-weight: 700; margin-bottom: 1rem; color: var(--clr-text-main); font-size: 1.1rem;">
+                    Jumlah Penjualan Kursus per Bulan: <span id="salesVal" style="color: var(--clr-secondary); font-size: 1.5rem;">15</span> Kursus
+                </label>
+                <input type="range" id="salesRange" min="1" max="100" value="15" style="width: 100%; height: 8px; border-radius: 4px; background: #cbd5e1; outline: none; -webkit-appearance: none; cursor: pointer; accent-color: var(--clr-secondary);">
+            </div>
+
+            <div class="grid grid-2 grid-stack-md" style="gap: 1.5rem; text-align: left; margin-bottom: 1.5rem; display: grid;">
+                <div style="background: rgba(59, 130, 246, 0.04); border-radius: var(--radius-md); padding: 1.5rem; border: 1px solid rgba(59, 130, 246, 0.1);">
+                    <div style="font-size: 0.85rem; font-weight: 700; color: var(--clr-text-muted); margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.5px;">ESTIMASI PENDAPATAN ANDA</div>
+                    <div id="calcEarnings" style="font-size: 1.8rem; font-weight: 800; color: var(--clr-secondary);">Rp 1.646.700</div>
+                    <small id="calcTier" style="color: var(--clr-text-muted); font-weight: 600; display: block; margin-top: 0.25rem;">Tingkatan: Terampil (22% Komisi)</small>
+                </div>
+                <div style="background: rgba(16, 185, 129, 0.04); border-radius: var(--radius-md); padding: 1.5rem; border: 1px solid rgba(16, 185, 129, 0.1);">
+                    <div style="font-size: 0.85rem; font-weight: 700; color: var(--clr-text-muted); margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.5px;">BEASISWA YANG DIDANAI</div>
+                    <div id="calcScholarships" style="font-size: 1.8rem; font-weight: 800; color: #10B981;">0.3 Beasiswa</div>
+                    <small style="color: var(--clr-text-muted); font-weight: 600; display: block; margin-top: 0.25rem;">Disalurkan ke Gotong Royong Pool</small>
+                </div>
+            </div>
+            
+            <p style="font-size: 0.85rem; color: var(--clr-text-muted); font-style: italic; margin-top: 1rem;">
+                * Perhitungan didasarkan pada harga kursus rata-rata Rp 499.000. 1 beasiswa penuh bernilai Rp 4.990.000 (10 penjualan = 1 beasiswa penuh).
+            </p>
+        </div>
+    </div>
+</section>
+
 <!-- Onboarding Registration Section -->
 <section id="register" style="padding: 6rem 0; background: var(--clr-bg); border-top: 1px solid var(--clr-border);">
     <div class="container">
@@ -190,6 +227,50 @@
     function closeLoginModal() {
         document.getElementById('loginModal').classList.remove('active');
     }
+
+    // Gotong Royong Calculator Logic
+    (() => {
+        const salesRange = document.getElementById('salesRange');
+        const salesVal = document.getElementById('salesVal');
+        const calcEarnings = document.getElementById('calcEarnings');
+        const calcTier = document.getElementById('calcTier');
+        const calcScholarships = document.getElementById('calcScholarships');
+
+        if (salesRange && salesVal && calcEarnings && calcTier && calcScholarships) {
+            const coursePrice = 499000;
+
+            function updateCalculator() {
+                const sales = parseInt(salesRange.value, 10);
+                salesVal.innerText = sales;
+
+                // Determine tier commission rate
+                let rate = 0.20;
+                let tierName = "Rintisan";
+                if (sales >= 51) {
+                    rate = 0.30;
+                    tierName = "Maestro";
+                } else if (sales >= 21) {
+                    rate = 0.25;
+                    tierName = "Ahli";
+                } else if (sales >= 6) {
+                    rate = 0.22;
+                    tierName = "Terampil";
+                }
+
+                const totalRevenue = sales * coursePrice;
+                const earnings = Math.round(totalRevenue * rate);
+                const scholarships = (sales / 10).toFixed(1); // 10 sales funds 1 full scholarship
+
+                // Format currency
+                calcEarnings.innerText = 'Rp ' + earnings.toLocaleString('id-ID');
+                calcTier.innerText = `Tingkatan: ${tierName} (${rate * 100}% Komisi)`;
+                calcScholarships.innerText = `${scholarships} Beasiswa`;
+            }
+
+            salesRange.addEventListener('input', updateCalculator);
+            updateCalculator(); // Initial calculation
+        }
+    })();
 
     // Auto trigger login modal if redirect has login=true query param
     window.addEventListener('DOMContentLoaded', () => {

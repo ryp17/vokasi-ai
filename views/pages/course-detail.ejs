@@ -41,14 +41,39 @@
                     </div>
                 </div>
                 
-                <div style="display: flex; justify-content: center;">
-                    <!-- Floating abstract illustration card -->
-                    <div style="width: 100%; max-width: 380px; aspect-ratio: 4/3; background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%); border-radius: var(--radius-lg); border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(10px); display: flex; align-items: center; justify-content: center; box-shadow: 0 20px 40px rgba(0,0,0,0.2);">
-                        <% if (course.isComingSoon) { %>
-                            <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.8)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                        <% } else { %>
-                            <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.8)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
-                        <% } %>
+                <div style="display: flex; justify-content: center; width: 100%;">
+                    <!-- Interactive Certificate Mockup -->
+                    <div class="glass-card" style="width: 100%; max-width: 440px; aspect-ratio: 1.414/1; padding: 2.25rem; border-radius: var(--radius-md); border: 2px solid rgba(255, 255, 255, 0.4); background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(248,250,252,0.85) 100%); color: var(--clr-primary); position: relative; box-shadow: 0 20px 40px rgba(0,0,0,0.15); display: flex; flex-direction: column; justify-content: space-between; align-items: center; text-align: center;">
+                        <!-- Certificate border frame -->
+                        <div style="position: absolute; top: 8px; left: 8px; right: 8px; bottom: 8px; border: 1px solid rgba(59, 130, 246, 0.15); border-radius: 4px; pointer-events: none;"></div>
+                        
+                        <!-- Header -->
+                        <div>
+                            <div style="font-size: 0.65rem; font-weight: 800; color: var(--clr-secondary); letter-spacing: 2px; text-transform: uppercase;">SERTIFIKAT KELULUSAN</div>
+                            <div style="font-size: 0.45rem; color: var(--clr-text-muted); margin-top: 2px; letter-spacing: 1px;">VOKASI.AI INDONESIA</div>
+                        </div>
+
+                        <!-- Main content -->
+                        <div style="margin: 0.5rem 0;">
+                            <div style="font-size: 0.55rem; color: var(--clr-text-muted); font-style: italic;">Diberikan kepada:</div>
+                            <div id="cert-student-name" style="font-size: 1.4rem; font-weight: 800; color: #1e293b; margin: 0.25rem 0; font-family: var(--font-main); text-decoration: underline; text-decoration-color: var(--clr-secondary); text-underline-offset: 4px; word-break: break-all; max-width: 320px; line-height: 1.2;">NAMA ANDA</div>
+                            <div style="font-size: 0.55rem; color: var(--clr-text-muted); max-width: 280px; margin: 0.25rem auto 0; line-height: 1.4;">
+                                Atas kelulusan dan pemenuhan seluruh modul kompetensi kursus online:
+                                <strong style="color: var(--clr-primary); display: block; margin-top: 2px;"><%= course.title %></strong>
+                            </div>
+                        </div>
+
+                        <!-- Footer Signatures -->
+                        <div style="width: 100%; display: flex; justify-content: space-between; align-items: flex-end; padding: 0 1rem; font-size: 0.45rem; color: var(--clr-text-muted);">
+                            <div style="text-align: left;">
+                                <div style="font-weight: 700; color: var(--clr-primary);">Direktur Vokasi.ai</div>
+                                <div style="height: 12px;"></div>
+                                <div style="border-top: 0.5px solid var(--clr-border); padding-top: 2px;">Verification ID: VOK-<%= slug.toUpperCase().substring(0,4) %>-2026</div>
+                            </div>
+                            <div style="position: relative; display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 50%; background: rgba(59, 130, 246, 0.1); border: 1px dashed rgba(59,130,246,0.3); font-size: 0.55rem; color: var(--clr-secondary); font-weight: 800;">
+                                SEAL
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -63,14 +88,19 @@
                 <!-- Left Column (Content) -->
                 <div style="display: flex; flex-direction: column; gap: 3rem;">
                     
-                    <!-- Syllabus -->
+                    <!-- Syllabus (Accordion Format) -->
                     <div class="white-card" style="padding: 2.5rem; border-radius: var(--radius-lg); border: 1px solid var(--clr-border);">
                         <h2 style="font-size: 1.75rem; margin-bottom: 2rem;">Silabus Kursus</h2>
-                        <div style="display: flex; flex-direction: column; gap: 1rem;">
+                        <div style="display: flex; flex-direction: column; gap: 0.75rem;">
                             <% course.syllabus.forEach((mod, index) => { %>
-                                <div style="border: 1px solid var(--clr-border); border-radius: var(--radius-md); padding: 1.5rem; background: var(--clr-white);">
-                                    <h3 style="font-size: 1.15rem; color: var(--clr-text-main); margin-bottom: 0.5rem;"><%= mod.title %></h3>
-                                    <p style="color: var(--clr-text-muted); font-size: 0.95rem; margin: 0;"><%= mod.desc %></p>
+                                <div style="display: flex; flex-direction: column; width: 100%;">
+                                    <button class="syllabus-accordion-header" aria-expanded="<%= index === 0 ? 'true' : 'false' %>" data-target="syllabus-mod-<%= index %>">
+                                        <span><%= mod.title %></span>
+                                        <svg class="syllabus-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                                    </button>
+                                    <div id="syllabus-mod-<%= index %>" class="syllabus-accordion-content <%= index === 0 ? 'open' : '' %>">
+                                        <p style="color: var(--clr-text-muted); font-size: 0.95rem; margin: 0; line-height: 1.6;"><%= mod.desc %></p>
+                                    </div>
                                 </div>
                             <% }) %>
                         </div>
@@ -219,6 +249,45 @@
     </style>
 
     <script>
+        // Live certificate name preview updates
+        (() => {
+            const nameInput = document.querySelector('#courseApplyForm input[name="name"]');
+            const certName = document.getElementById('cert-student-name');
+            if (nameInput && certName) {
+                nameInput.addEventListener('input', () => {
+                    const val = nameInput.value.trim();
+                    certName.innerText = val ? val.toUpperCase() : "NAMA ANDA";
+                });
+            }
+        })();
+
+        // Syllabus accordion interactive logic
+        (() => {
+            document.querySelectorAll('.syllabus-accordion-header').forEach(header => {
+                header.addEventListener('click', () => {
+                    const targetId = header.getAttribute('data-target');
+                    const targetContent = document.getElementById(targetId);
+                    const isExpanded = header.getAttribute('aria-expanded') === 'true';
+
+                    // Close all other syllabus accordions
+                    document.querySelectorAll('.syllabus-accordion-header').forEach(h => {
+                        if (h !== header) {
+                            h.setAttribute('aria-expanded', 'false');
+                            const otherContent = document.getElementById(h.getAttribute('data-target'));
+                            if (otherContent) otherContent.classList.remove('open');
+                        }
+                    });
+
+                    // Toggle the clicked accordion item
+                    header.setAttribute('aria-expanded', !isExpanded ? 'true' : 'false');
+                    if (targetContent) {
+                        targetContent.classList.toggle('open');
+                    }
+                });
+            });
+        })();
+
+        // Form apply AJAX submission
         const courseApplyForm = document.getElementById('courseApplyForm');
         const submitBtn = document.getElementById('submitBtn');
         if (courseApplyForm) {
@@ -243,6 +312,9 @@
                         submitBtn.style.background = '#10B981';
                         submitBtn.style.borderColor = '#10B981';
                         courseApplyForm.reset();
+                        // Reset preview name
+                        const certName = document.getElementById('cert-student-name');
+                        if (certName) certName.innerText = "NAMA ANDA";
                     } else {
                         throw new Error('Network response was not ok');
                     }
