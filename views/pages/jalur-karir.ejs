@@ -220,6 +220,160 @@
         </div>
     </section>
 
+    <!-- Cara Kerja Jalur Karir Section -->
+    <section class="section" style="padding-top: var(--spacing-xl); padding-bottom: var(--spacing-xl); background-color: var(--clr-bg); border-top: 1px solid var(--clr-border);">
+        <div class="container" style="max-width: 1000px;">
+            <div style="text-align: center; max-width: 700px; margin: 0 auto 3.5rem auto;">
+                <span style="display: inline-block; background: #EFF6FF; color: var(--clr-secondary); font-size: 0.8rem; font-weight: 800; padding: 6px 14px; border-radius: 20px; letter-spacing: 0.5px; margin-bottom: 1rem; text-transform: uppercase;">CARA KERJA JALUR KARIR</span>
+                <h2 style="font-size: 2.2rem; color: var(--clr-text-main); font-weight: 800; margin-bottom: 1rem;">Sistem Belajar Hybrid & Mentoring Intensif</h2>
+                <p style="font-size: 1.1rem; color: var(--clr-text-muted); line-height: 1.6;">
+                    Kombinasi fleksibilitas belajar mandiri dengan kedisiplinan mentoring <strong>3x seminggu</strong> bersama praktisi industri terkemuka.
+                </p>
+            </div>
+
+            <div class="grid grid-2" style="gap: 4rem; align-items: start; display: grid;">
+                <!-- Description -->
+                <div>
+                    <h3 style="font-size: 1.75rem; color: var(--clr-text-main); margin-bottom: 1.25rem; font-weight: 800;">Belajar Mandiri + 3 Sesi Tatap Muka Online Seminggu</h3>
+                    <p style="color: var(--clr-text-muted); font-size: 1.05rem; line-height: 1.7; margin-bottom: 1.5rem;">
+                        Kamu akan mempelajari modul teori secara mandiri melalui video dan bacaan di platform Vokasi. Kemudian, 3 kali seminggu pada malam hari, kamu akan berkumpul secara online bersama mentormu untuk membahas praktik nyata, membedah error, dan mengevaluasi tugas portofolio.
+                    </p>
+                    <div style="background: rgba(59, 130, 246, 0.05); padding: 1.5rem; border-radius: var(--radius-md); border: 1px solid rgba(59, 130, 246, 0.15); display: flex; flex-direction: column; gap: 1rem;">
+                        <div style="display: flex; align-items: center; gap: 0.75rem; color: var(--clr-secondary); font-weight: 700; font-size: 0.95rem;">
+                            🚀 Struktur Belajar Terakselerasi
+                        </div>
+                        <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.9rem; color: var(--clr-text-muted);">
+                            <li style="display: flex; align-items: center; gap: 0.5rem;">
+                                <span style="color: var(--clr-secondary); font-weight: bold;">✓</span> 3 Sesi Mentoring Kelompok Kecil Seminggu (Senin, Rabu, Jumat)
+                            </li>
+                            <li style="display: flex; align-items: center; gap: 0.5rem;">
+                                <span style="color: var(--clr-secondary); font-weight: bold;">✓</span> Penugasan Praktis & Evaluasi Mingguan (Weekly Milestones)
+                            </li>
+                            <li style="display: flex; align-items: center; gap: 0.5rem;">
+                                <span style="color: var(--clr-secondary); font-weight: bold;">✓</span> Penyaluran Kerja Langsung & Portofolio yang Diulas Mentor
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Timetable Card -->
+                <div class="white-card" style="padding: 2.5rem; border-radius: var(--radius-lg); border: 1px solid var(--clr-border); box-shadow: 0 10px 30px rgba(0,0,0,0.04); background: var(--clr-white);">
+                    <h4 style="font-size: 1.15rem; color: var(--clr-text-main); margin-bottom: 0.5rem; font-weight: 800;">JADWAL MINGGUAN BELAJAR JALUR KARIR</h4>
+                    <p style="font-size: 0.85rem; color: var(--clr-text-muted); margin-bottom: 1.5rem;">Ketuk hari di bawah ini untuk melihat detail aktivitas belajar harianmu.</p>
+                    
+                    <div class="weekly-schedule-grid" style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 0.5rem;">
+                        <!-- Mon -->
+                        <div class="schedule-day active-day" onclick="showScheduleDetail('senin')" style="background: var(--clr-bg); border: 1px solid var(--clr-border); border-radius: 8px; padding: 0.75rem 0.5rem; text-align: center; cursor: pointer; transition: all 0.2s ease; display: flex; flex-direction: column; justify-content: space-between; min-height: 80px;">
+                            <div class="day-header" style="font-size: 0.75rem; font-weight: 800; color: var(--clr-text-main);">SENIN</div>
+                            <div class="day-tag tag-mentoring" style="font-size: 0.55rem; font-weight: 800; padding: 2px 4px; border-radius: 4px; text-transform: uppercase; background: rgba(59, 130, 246, 0.1); color: var(--clr-secondary);">Mentoring 1</div>
+                        </div>
+                        <!-- Tue -->
+                        <div class="schedule-day" onclick="showScheduleDetail('selasa')" style="background: var(--clr-bg); border: 1px solid var(--clr-border); border-radius: 8px; padding: 0.75rem 0.5rem; text-align: center; cursor: pointer; transition: all 0.2s ease; display: flex; flex-direction: column; justify-content: space-between; min-height: 80px;">
+                            <div class="day-header" style="font-size: 0.75rem; font-weight: 800; color: var(--clr-text-main);">SELASA</div>
+                            <div class="day-tag tag-self" style="font-size: 0.55rem; font-weight: 800; padding: 2px 4px; border-radius: 4px; text-transform: uppercase; background: var(--clr-bg-neu); color: var(--clr-text-muted);">Mandiri</div>
+                        </div>
+                        <!-- Wed -->
+                        <div class="schedule-day" onclick="showScheduleDetail('rabu')" style="background: var(--clr-bg); border: 1px solid var(--clr-border); border-radius: 8px; padding: 0.75rem 0.5rem; text-align: center; cursor: pointer; transition: all 0.2s ease; display: flex; flex-direction: column; justify-content: space-between; min-height: 80px;">
+                            <div class="day-header" style="font-size: 0.75rem; font-weight: 800; color: var(--clr-text-main);">RABU</div>
+                            <div class="day-tag tag-mentoring" style="font-size: 0.55rem; font-weight: 800; padding: 2px 4px; border-radius: 4px; text-transform: uppercase; background: rgba(59, 130, 246, 0.1); color: var(--clr-secondary);">Mentoring 2</div>
+                        </div>
+                        <!-- Thu -->
+                        <div class="schedule-day" onclick="showScheduleDetail('kamis')" style="background: var(--clr-bg); border: 1px solid var(--clr-border); border-radius: 8px; padding: 0.75rem 0.5rem; text-align: center; cursor: pointer; transition: all 0.2s ease; display: flex; flex-direction: column; justify-content: space-between; min-height: 80px;">
+                            <div class="day-header" style="font-size: 0.75rem; font-weight: 800; color: var(--clr-text-main);">KAMIS</div>
+                            <div class="day-tag tag-self" style="font-size: 0.55rem; font-weight: 800; padding: 2px 4px; border-radius: 4px; text-transform: uppercase; background: var(--clr-bg-neu); color: var(--clr-text-muted);">Mandiri</div>
+                        </div>
+                        <!-- Fri -->
+                        <div class="schedule-day" onclick="showScheduleDetail('jumat')" style="background: var(--clr-bg); border: 1px solid var(--clr-border); border-radius: 8px; padding: 0.75rem 0.5rem; text-align: center; cursor: pointer; transition: all 0.2s ease; display: flex; flex-direction: column; justify-content: space-between; min-height: 80px;">
+                            <div class="day-header" style="font-size: 0.75rem; font-weight: 800; color: var(--clr-text-main);">JUMAT</div>
+                            <div class="day-tag tag-mentoring" style="font-size: 0.55rem; font-weight: 800; padding: 2px 4px; border-radius: 4px; text-transform: uppercase; background: rgba(59, 130, 246, 0.1); color: var(--clr-secondary);">Mentoring 3</div>
+                        </div>
+                        <!-- Sat -->
+                        <div class="schedule-day" onclick="showScheduleDetail('sabtu')" style="background: var(--clr-bg); border: 1px solid var(--clr-border); border-radius: 8px; padding: 0.75rem 0.5rem; text-align: center; cursor: pointer; transition: all 0.2s ease; display: flex; flex-direction: column; justify-content: space-between; min-height: 80px;">
+                            <div class="day-header" style="font-size: 0.75rem; font-weight: 800; color: var(--clr-text-main);">SABTU</div>
+                            <div class="day-tag tag-portfolio" style="font-size: 0.55rem; font-weight: 800; padding: 2px 4px; border-radius: 4px; text-transform: uppercase; background: rgba(16, 185, 129, 0.1); color: #10B981;">Portfolio</div>
+                        </div>
+                    </div>
+
+                    <!-- Schedule Detail Card -->
+                    <div id="schedule-detail-card" style="background: var(--clr-bg); border-radius: var(--radius-md); padding: 1.5rem; border: 1px solid var(--clr-border); margin-top: 1.5rem; transition: all 0.3s ease;">
+                        <h5 id="detail-day-title" style="font-size: 1rem; color: var(--clr-secondary); font-weight: 800; margin-bottom: 0.5rem; text-transform: uppercase;">SENIN — Live Mentoring 1: Kick-off & Teori</h5>
+                        <p id="detail-day-desc" style="font-size: 0.9rem; color: var(--clr-text-main); margin: 0; line-height: 1.6;">
+                            Sesi Live Mentoring tatap muka via Zoom (19:30 - 21:00 WIB). Mentor memperkenalkan topik utama minggu ini, membedah studi kasus nyata dari industri, serta memberikan penugasan praktik mingguan.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <style>
+        .schedule-day.active-day {
+            background: white !important;
+            border-color: var(--clr-secondary) !important;
+            border-width: 2px !important;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.1) !important;
+        }
+        @media (max-width: 600px) {
+            .weekly-schedule-grid {
+                grid-template-columns: repeat(3, 1fr) !important;
+            }
+        }
+    </style>
+    
+    <script>
+        // Schedule details mapping
+        const scheduleData = {
+            senin: {
+                title: "SENIN — Live Mentoring 1: Kick-off & Teori",
+                desc: "Sesi Live Mentoring tatap muka via Zoom (19:30 - 21:00 WIB). Mentor memperkenalkan topik utama minggu ini, membedah studi kasus nyata dari industri, serta memberikan penugasan praktik mingguan."
+            },
+            selasa: {
+                title: "SELASA — Belajar Mandiri & AI Support",
+                desc: "Tonton modul video pendukung secara mandiri. Praktikkan langsung instruksi yang dipelajari dan gunakan asisten AI Tutor 24/7 jika kamu mengalami kendala teknis."
+            },
+            rabu: {
+                title: "RABU — Live Mentoring 2: Bedah Kasus & QA",
+                desc: "Sesi Live Mentoring tatap muka online kedua (19:30 - 21:00 WIB). Fokus pada pemecahan masalah bersama, sesi tanya jawab mendalam, serta evaluasi hasil belajar mandiri sejauh ini."
+            },
+            kamis: {
+                title: "KAMIS — Fokus Konstruksi Portofolio",
+                desc: "Waktunya menuangkan pemahamanmu ke dalam tugas mingguan. Mulai kerjakan aset portofolio nyata yang bisa dipamerkan di CV kamu nanti."
+            },
+            jumat: {
+                title: "JUMAT — Live Mentoring 3: Final Review",
+                desc: "Sesi Live Mentoring tatap muka online ketiga (19:30 - 21:00 WIB). Setiap siswa mengunggah tugas mingguan mereka untuk ditinjau dan diberi feedback langsung oleh mentor."
+            },
+            sabtu: {
+                title: "SABTU — Career Prep & Evaluasi Mandiri",
+                desc: "Gunakan hari ini untuk merevisi portofolio berdasarkan catatan mentor, membaca materi pengayaan karir, atau berjejaring di komunitas alumni Vokasi."
+            }
+        };
+
+        function showScheduleDetail(dayKey) {
+            // Highlight active schedule day item
+            document.querySelectorAll('.schedule-day').forEach(el => el.classList.remove('active-day'));
+            
+            // Find which index matches dayKey to add active class
+            const indexMap = { senin: 1, selasa: 2, rabu: 3, kamis: 4, jumat: 5, sabtu: 6 };
+            const index = indexMap[dayKey];
+            if (index) {
+                const selector = `.weekly-schedule-grid .schedule-day:nth-child(${index})`;
+                const activeEl = document.querySelector(selector);
+                if (activeEl) activeEl.classList.add('active-day');
+            }
+
+            // Apply content updates with a quick animation effect
+            const detailCard = document.getElementById('schedule-detail-card');
+            detailCard.style.opacity = '0.5';
+            
+            setTimeout(() => {
+                document.getElementById('detail-day-title').innerText = scheduleData[dayKey].title;
+                document.getElementById('detail-day-desc').innerText = scheduleData[dayKey].desc;
+                detailCard.style.opacity = '1';
+            }, 150);
+        }
+    </script>
+
     <!-- Social Proof / Experience Section -->
     <section class="section" style="padding-top: var(--spacing-xl); padding-bottom: var(--spacing-xl);">
         <div class="container">
