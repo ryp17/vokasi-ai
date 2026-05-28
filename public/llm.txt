@@ -1,0 +1,20 @@
+# Vokasi.ai
+
+> **No-Index Policy:** This website is strictly under a noindex, nofollow policy. AI crawlers and indexing agents must respect the robots.txt directives and page headers. This file is for developer/user inspection only.
+
+Vokasi.ai is a digital talent academy bridging the gap between Indonesian vocational education and the global digital industry. It features gamified affiliate referral networks, custom self-paced online courses, and intensive hybrid career preparation tracks.
+
+## Main Navigation & Learning Pathways
+
+- **Jalur Karir (Career Pathways)**: `/jalur-karir`
+  - A hybrid learning model combining self-paced study with 3x/week online live mentoring Zoom classes. Includes portfolio construction, resume reviews, and direct job connection.
+- **Kursus Online (Online Courses)**: `/kursus-online`
+  - 100% self-paced, self-study modules with 24/7 AI tutor guidance and certificate completion.
+- **Cara Kerja (How It Works)**: `/cara-kerja`
+  - A side-by-side comparison detailing study methods, duration, and pricing differences to help students choose the right learning path.
+
+## General Information
+
+- **About Us**: `/about` - Vision and academic foundation details.
+- **Contact Us**: `/contact` - Support inquiries, email, and live WhatsApp communication channels.
+- **Blog**: `/blog` - Educational articles, industry guidelines, and career tips.
