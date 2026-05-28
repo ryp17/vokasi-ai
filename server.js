@@ -467,6 +467,10 @@ app.post('/api/admin/referral/status', requireAdmin, (req, res) => {
 });
 
 // Start server
-app.listen(PORT, () => {
-    console.log(`Vokasi.ai server running on http://localhost:${PORT}`);
-});
+if (process.env.NODE_ENV !== 'production') {
+    app.listen(PORT, () => {
+        console.log(`Vokasi.ai server running on http://localhost:${PORT}`);
+    });
+}
+
+module.exports = app;
